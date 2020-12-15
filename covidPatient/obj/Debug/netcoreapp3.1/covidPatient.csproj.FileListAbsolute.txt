@@ -1,0 +1,13 @@
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.exe
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.deps.json
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.runtimeconfig.json
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.runtimeconfig.dev.json
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\covidPatient.pdb
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csprojAssemblyReference.cache
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.AssemblyInfoInputs.cache
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.AssemblyInfo.cs
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csproj.CoreCompileInputs.cache
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.pdb
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.genruntimeconfig.cache
