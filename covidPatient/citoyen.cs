@@ -6,15 +6,18 @@ namespace covidPatient
 {
     class citoyen
     {
-        private int citoyenID;
-        private string firstName;
-        private string lastName;
+        private string cin;
+        private string name;
         private string address;
         private int age;
-        private bool contactwithcase;
-        private bool covid;
-
-        public void tester() { }
+        private bool contactWithInfectedCase;
+        private bool Symptoms;
+    
+        void setCin()
+        {
+            Console.WriteLine("votre cin");
+            cin = Console.ReadLine();
+        }
 
     }
 }
