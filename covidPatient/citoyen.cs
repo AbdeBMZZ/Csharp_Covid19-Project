@@ -10,13 +10,32 @@ namespace covidPatient
         private string name;
         private string address;
         private int age;
-        private bool contactWithInfectedCase;
+        private bool CWIC; // contact With Infected Case
         private bool Symptoms;
     
-        void setCin()
+        void setCin(string n)
         {
-            Console.WriteLine("votre cin");
-            cin = Console.ReadLine();
+            cin = n;
+        }
+        void setName(string n)
+        {
+            name = n;
+        }
+        void setAddress(string n)
+        {
+            address = n;
+        }
+        void setAge(int n)
+        {
+            age = n;
+        }
+        void cwic(bool n)
+        {
+            CWIC = n;
+        }
+        void covidsymptoms(bool n)
+        {
+            Symptoms = n;
         }
 
     }
