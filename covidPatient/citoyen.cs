@@ -13,27 +13,27 @@ namespace covidPatient
         protected bool CWIC; // contact With Infected Case
         protected bool Symptoms;
         protected string code;
-        void setCin(string n)
+        public void setCin(string n)
         {
             cin = n;
         }
-        void setName(string n)
+        public void setName(string n)
         {
             name = n;
         }
-        void setAddress(string n)
+        public void setAddress(string n)
         {
             address = n;
         }
-        void setAge(int n)
+        public void setAge(int n)
         {
             age = n;
         }
-        void cwic(bool n)
+        public void cwic(bool n)
         {
             CWIC = n;
         }
-        void covidsymptoms(bool n)
+        public void covidsymptoms(bool n)
         {
             Symptoms = n;
         }

@@ -14,7 +14,11 @@ namespace covidPatient
                 PCR = "negatif";
 
             else if (CWIC == true && Symptoms == true)
+            {
                 PCR = "positif";
+                Console.WriteLine("abdellah positif");
+
+            }
         }
         void setCode()
         {
