@@ -6,13 +6,13 @@ namespace covidPatient
 {
     class citoyen
     {
-        private string cin;
-        private string name;
-        private string address;
-        private int age;
-        private bool CWIC; // contact With Infected Case
-        private bool Symptoms;
-    
+        protected string cin;
+        protected string name;
+        protected string address;
+        protected int age;
+        protected bool CWIC; // contact With Infected Case
+        protected bool Symptoms;
+        protected string code;
         void setCin(string n)
         {
             cin = n;
@@ -37,6 +37,7 @@ namespace covidPatient
         {
             Symptoms = n;
         }
+        
 
     }
 }
