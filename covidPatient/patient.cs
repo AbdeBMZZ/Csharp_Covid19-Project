@@ -6,47 +6,44 @@ namespace covidPatient
 {
     class patient:citoyen
     {
-        private string PCR;
         private int nbrJrsQuarantaine = 0;
-        public patient()
-        {
-            Console.WriteLine("tu es infecté");
-        }
 
         public void passerQuarantaine()
         {
             for(int i = 0; i < 14; i++)
             {
                 nbrJrsQuarantaine++;
+                Console.WriteLine("Quarantaine jour : " + nbrJrsQuarantaine);
             }
             if (age < 40)
             {
                 Symptoms = false;
-                CWIC = false;
             }
 
+            if (nbrJrsQuarantaine == 14)
+            {
+                Console.WriteLine("you'll repass the PCR test \n");
+
+                refaireTest();
+            }
         }
         public void refaireTest()
         {
-            if (CWIC == false && Symptoms == false)
-                PCR = "negatif";
+            if (Symptoms == false && nbrJrsQuarantaine==14 || hopital.Ameliore())
+            {
+                Console.WriteLine("\nyou've healed from covid, you can go home");
+            }
 
             else if (CWIC == true && Symptoms == true)
             {
-                PCR = "positif";
+                Console.Write("you will go to the Urgence");
+
             }
         }
-        public void setCode()
+
+        public void enReanimation()
         {
-            if (PCR == "negatif")
-                code = "green";
-
-            if (PCR == "positif")
-                code = "orange";
-
-            if (PCR == "positif" && age > 60)
-                code = "red";
+            hopital.Reanimation();
         }
-
     }
 }
