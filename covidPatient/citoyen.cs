@@ -25,11 +25,14 @@ namespace covidPatient
             Console.WriteLine("votre nom complet : ");
             name = Console.ReadLine();
 
+            Console.WriteLine("votre age : ");
+            age = int.Parse(Console.ReadLine());
+
             Console.WriteLine("votre cin : ");
             cin = Console.ReadLine();
 
-            Console.WriteLine("votre age : ");
-            age = int.Parse(Console.ReadLine());
+            Console.WriteLine("votre adresse : ");
+            address = Console.ReadLine();
 
             Console.WriteLine("avez-vous contacté un cas infecté : (oui ou non) ");
             string reponse = Console.ReadLine();
