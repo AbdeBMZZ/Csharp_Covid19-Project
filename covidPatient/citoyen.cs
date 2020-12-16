@@ -24,19 +24,15 @@ namespace covidPatient
         {
             Console.WriteLine("votre nom complet : ");
             name = Console.ReadLine();
-            Console.WriteLine("\n");
 
             Console.WriteLine("votre cin : ");
             cin = Console.ReadLine();
-            Console.WriteLine("\n");
 
             Console.WriteLine("votre age : ");
             age = int.Parse(Console.ReadLine());
-            Console.WriteLine("\n");
 
             Console.WriteLine("avez-vous contacté un cas infecté : (oui ou non) ");
             string reponse = Console.ReadLine();
-            Console.WriteLine("\n");
 
             if (reponse == "non")
                 CWIC = false;
@@ -45,7 +41,6 @@ namespace covidPatient
 
             Console.WriteLine("avez-vous les symptômes de covid : (oui ou non) ");
             string reponse2 = Console.ReadLine();
-            Console.WriteLine("\n");
 
             if (reponse2 == "non")
                 Symptoms = false;
@@ -67,6 +62,11 @@ namespace covidPatient
                 else if (reponse3 == "non")
                 {
                     code = "red";
+                    for(int j = 0; j < 14; j++)
+                    {
+                        Console.WriteLine("jours sans quarantaine " + j+1);
+                    }
+                    Console.WriteLine("\naggravation du citoyen\n");
                     patient p2 = new patient();
                     p2.enReanimation();
                 }
@@ -83,6 +83,7 @@ namespace covidPatient
 
                 }
             }
+
         }
         public void faireTest()
         {
