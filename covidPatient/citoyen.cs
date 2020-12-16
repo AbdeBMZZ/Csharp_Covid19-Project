@@ -13,7 +13,6 @@ namespace covidPatient
         protected bool CWIC; // contact With Infected Case
         protected bool Symptoms;
         protected string code;
-        protected bool isPassedTest = false;
         public citoyen()
         {
 
@@ -54,7 +53,7 @@ namespace covidPatient
 
             if (CWIC==true && Symptoms == true)
             {
-                Console.WriteLine("you should do the test immediatly!! want to do it ?");
+                Console.WriteLine("vous devez faire le test immédiatement !! vouloir le faire ?");
                 string reponse3 = Console.ReadLine();
                 Console.WriteLine("\n");
 
@@ -67,16 +66,10 @@ namespace covidPatient
                     code = "red";
             }
         }
-       
-        public string getCode()
-        {
-            return code;
-        }
-
         public void faireTest()
         {
             int daysW8ing = 0;
-            isPassedTest = true;
+
             for(int i = 0; i < 2; i++)
             {
                 daysW8ing++;
@@ -87,7 +80,7 @@ namespace covidPatient
 
             if (CWIC == false && Symptoms == false)
             {
-                Console.WriteLine("état sain");
+                Console.WriteLine("vous avez testé négatif pour covid \n");
                 code = "green";
             }
 
@@ -99,7 +92,7 @@ namespace covidPatient
                 else if (age >= 60)
                     code = "red";
 
-                Console.WriteLine("you have the covid ");
+                Console.WriteLine("vous avez testé positif pour covid \n");
                 patient p1 = new patient();
                 if (code == "orange")
                 {

@@ -11,7 +11,7 @@ namespace covidPatient
         static bool ameliore = false;
         public static void Aggravation_Amelioration()
         {
-            int test = rand.Next(1, 2);
+            int test = rand.Next(0, 2);
             if (test == 1)
             {
                 Console.WriteLine("\n etat amélioré \n");
@@ -48,5 +48,7 @@ namespace covidPatient
 
 
         }
+
+        
     }
 }
