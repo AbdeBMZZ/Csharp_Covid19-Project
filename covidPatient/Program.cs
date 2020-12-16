@@ -6,6 +6,7 @@ namespace covidPatient
     {
         static void Main(string[] args)
         {
+            citoyen person1 = new citoyen();
             
         }
     }

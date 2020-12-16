@@ -6,13 +6,28 @@ namespace covidPatient
 {
     class citoyen
     {
-        protected string cin;
         protected string name;
-        protected string address;
         protected int age;
+        protected string cin;
+        protected string address;
         protected bool CWIC; // contact With Infected Case
         protected bool Symptoms;
         protected string code;
+
+        public void setInfo()
+        {
+            Console.WriteLine("votre nom complet : ");
+            name = Console.ReadLine();
+
+            Console.WriteLine("votre adresse : ");
+            cin = Console.ReadLine();
+
+            Console.WriteLine("votre age : ");
+            age = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("votre adresse: ");
+            string reponse;
+        }
         public void setCin(string n)
         {
             cin = n;
@@ -38,11 +53,22 @@ namespace covidPatient
             Symptoms = n;
         }
         
-        public void whatShouldDo()
+        public string getCode()
         {
-            if(CWIC == true && Symptoms == true)
+            return code;
+        }
+
+        public void faireTest()
+        {
+            if (CWIC == false && Symptoms == false)
+                Console.WriteLine("You are healthy");
+
+            else if (CWIC == true && Symptoms == true)
             {
                 patient p1 = new patient();
+                p1.setCode();
+                p1.passerQuarantaine();
+                p1.refaireTest();
             }
         }
 

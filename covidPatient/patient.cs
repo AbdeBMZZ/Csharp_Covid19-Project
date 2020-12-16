@@ -7,8 +7,26 @@ namespace covidPatient
     class patient:citoyen
     {
         private string PCR;
+        private int nbrJrsQuarantaine = 0;
+        public patient()
+        {
+            Console.WriteLine("tu es infecté");
+        }
 
-        public void faireTest()
+        public void passerQuarantaine()
+        {
+            for(int i = 0; i < 14; i++)
+            {
+                nbrJrsQuarantaine++;
+            }
+            if (age < 40)
+            {
+                Symptoms = false;
+                CWIC = false;
+            }
+
+        }
+        public void refaireTest()
         {
             if (CWIC == false && Symptoms == false)
                 PCR = "negatif";
@@ -16,11 +34,9 @@ namespace covidPatient
             else if (CWIC == true && Symptoms == true)
             {
                 PCR = "positif";
-                Console.WriteLine(name+" a un test positif");
-
             }
         }
-        void setCode()
+        public void setCode()
         {
             if (PCR == "negatif")
                 code = "green";
@@ -31,5 +47,6 @@ namespace covidPatient
             if (PCR == "positif" && age > 60)
                 code = "red";
         }
+
     }
 }
