@@ -25,32 +25,21 @@ namespace covidPatient
             Console.WriteLine("votre age : ");
             age = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("votre adresse: ");
-            string reponse;
-        }
-        public void setCin(string n)
-        {
-            cin = n;
-        }
-        public void setName(string n)
-        {
-            name = n;
-        }
-        public void setAddress(string n)
-        {
-            address = n;
-        }
-        public void setAge(int n)
-        {
-            age = n;
-        }
-        public void cwic(bool n)
-        {
-            CWIC = n;
-        }
-        public void covidsymptoms(bool n)
-        {
-            Symptoms = n;
+            Console.WriteLine("avez-vous contacté un cas infecté : (oui ou non) ");
+            string reponse = Console.ReadLine();
+
+            if (reponse == "non")
+                CWIC = false;
+            else if (reponse == "oui")
+                CWIC = true;
+
+            Console.WriteLine("avez-vous les symptômes de covid : (oui ou non) ");
+            string reponse2 = Console.ReadLine();
+
+            if (reponse2 == "non")
+                CWIC = false;
+            else if (reponse2 == "oui")
+                CWIC = true;
         }
         
         public string getCode()
