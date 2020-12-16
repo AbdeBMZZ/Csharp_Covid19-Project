@@ -22,7 +22,7 @@ namespace covidPatient
 
             if (nbrJrsQuarantaine == 14)
             {
-                Console.WriteLine("you'll repass the PCR test \n");
+                Console.WriteLine("\nvous repasserez le test PCR  \n");
 
                 refaireTest();
             }
@@ -31,12 +31,13 @@ namespace covidPatient
         {
             if (Symptoms == false && nbrJrsQuarantaine==14 || hopital.Ameliore())
             {
-                Console.WriteLine("\nyou've healed from covid, you can go home");
+                Console.WriteLine("\nTu as guéri de covid, tu peux rentrer à la maison");
             }
 
-            else if (CWIC == true && Symptoms == true)
+            else if (Symptoms == true)
             {
-                Console.Write("you will go to the Urgence");
+                Console.Write("aggravation du patient, vous serez ému et bénéficierez des services de réanimation");
+                enReanimation();
 
             }
         }

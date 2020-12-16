@@ -26,7 +26,7 @@ namespace covidPatient
             name = Console.ReadLine();
             Console.WriteLine("\n");
 
-            Console.WriteLine("votre adresse : ");
+            Console.WriteLine("votre cin : ");
             cin = Console.ReadLine();
             Console.WriteLine("\n");
 
@@ -65,7 +65,11 @@ namespace covidPatient
 
                 }
                 else if (reponse3 == "non")
+                {
                     code = "red";
+                    patient p2 = new patient();
+                    p2.enReanimation();
+                }
             }
             else
             {
