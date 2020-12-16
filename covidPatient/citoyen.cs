@@ -13,6 +13,8 @@ namespace covidPatient
         protected bool CWIC; // contact With Infected Case
         protected bool Symptoms;
         protected string code;
+        private bool estVaccine;
+        
         public citoyen()
         {
 
@@ -80,42 +82,59 @@ namespace covidPatient
         }
         public void faireTest()
         {
-            int daysW8ing = 0;
-
-            for(int i = 0; i < 2; i++)
+            if (code == "blue")
             {
-                daysW8ing++;
-                Console.WriteLine("waiting day : " + daysW8ing);
-
+                Console.WriteLine("vous êtes vacciné, pas besoin de passer le test de covid");
             }
-            Console.WriteLine("\n");
-
-            if (CWIC == false && Symptoms == false)
+            else
             {
-                Console.WriteLine("vous avez testé négatif pour covid \n");
-                code = "green";
-            }
+                int daysWaiting = 0;
 
-            else if (CWIC == true && Symptoms == true)
-            {
-                if (age < 60)
-                    code = "orange";
-
-                else if (age >= 60)
-                    code = "red";
-
-                Console.WriteLine("vous avez testé positif pour covid \n");
-                patient p1 = new patient();
-                if (code == "orange")
+                for (int i = 0; i < 2; i++)
                 {
-                    p1.passerQuarantaine();
+                    daysWaiting++;
+                    Console.WriteLine("waiting day : " + daysWaiting);
+
                 }
-                else if (code == "red")
+                Console.WriteLine("\n");
+
+                if (CWIC == false && Symptoms == false)
                 {
-                    p1.enReanimation();
+                    Console.WriteLine("vous avez testé négatif pour covid \n");
+                    code = "green";
                 }
-                
+
+                else if (CWIC == true && Symptoms == true)
+                {
+                    if (age < 60)
+                        code = "orange";
+
+                    else if (age >= 60)
+                        code = "red";
+
+                    Console.WriteLine("vous avez testé positif pour covid \n");
+
+                    patient p1 = new patient();
+
+                    if (code == "orange")
+                    {
+                        p1.passerQuarantaine();
+                    }
+                    else if (code == "red")
+                    {
+                        p1.enReanimation();
+                    }
+
+                }
             }
+
+        }
+
+        public void vacciner()
+        {
+            vaccin.vacciner();
+            estVaccine = true;
+            code = "blue";
         }
 
     }
