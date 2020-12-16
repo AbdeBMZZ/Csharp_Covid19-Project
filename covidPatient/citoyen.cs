@@ -38,6 +38,13 @@ namespace covidPatient
             Symptoms = n;
         }
         
+        public void whatShouldDo()
+        {
+            if(CWIC == true && Symptoms == true)
+            {
+                patient p1 = new patient();
+            }
+        }
 
     }
 }

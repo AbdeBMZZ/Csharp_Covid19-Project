@@ -16,7 +16,7 @@ namespace covidPatient
             else if (CWIC == true && Symptoms == true)
             {
                 PCR = "positif";
-                Console.WriteLine("abdellah positif");
+                Console.WriteLine(name+" a un test positif");
 
             }
         }
