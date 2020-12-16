@@ -75,7 +75,16 @@ namespace covidPatient
 
         public void faireTest()
         {
-            isPassedTest = true;    
+            int daysW8ing = 0;
+            isPassedTest = true;
+            for(int i = 0; i < 2; i++)
+            {
+                daysW8ing++;
+                Console.WriteLine("waiting day : " + daysW8ing);
+
+            }
+            Console.WriteLine("\n");
+
             if (CWIC == false && Symptoms == false)
             {
                 Console.WriteLine("état sain");

@@ -6,7 +6,7 @@ namespace covidPatient
 {
     class hopital
     {
-        private int ReanimationNbrJrs = 0;
+        private static int ReanimationNbrJrs = 0;
         static Random rand = new Random();
         static bool ameliore = false;
         public static void Aggravation_Amelioration()
@@ -39,7 +39,9 @@ namespace covidPatient
         {
             for(int i = 0; i < 7; i++)
             {
-                Console.WriteLine("en Reanimation");
+                ReanimationNbrJrs++;
+                Console.WriteLine("en Reanimation jour " + ReanimationNbrJrs);
+
             }
 
             Aggravation_Amelioration();
