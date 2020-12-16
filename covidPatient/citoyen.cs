@@ -65,6 +65,18 @@ namespace covidPatient
                 else if (reponse3 == "non")
                     code = "red";
             }
+            else
+            {
+                Console.WriteLine("faire le test ? ");
+                string reponse4 = Console.ReadLine();
+                Console.WriteLine("\n");
+
+                if (reponse4 == "oui")
+                {
+                    faireTest();
+
+                }
+            }
         }
         public void faireTest()
         {
