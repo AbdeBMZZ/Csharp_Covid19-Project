@@ -41,7 +41,6 @@ namespace covidPatient
 
             }
         }
-
         public void enReanimation()
         {
             hopital.Reanimation();

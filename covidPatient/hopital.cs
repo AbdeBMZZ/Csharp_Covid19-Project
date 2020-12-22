@@ -9,10 +9,27 @@ namespace covidPatient
         private static int ReanimationNbrJrs = 0;
         static Random rand = new Random();
         static bool ameliore = false;
+        public static DateTime dateDeces;
+        public static string lieu;
+        public static string raison;
+
+        public DateTime date_deces()
+        {
+            return dateDeces;
+        }
+
+        public string lieu_deces()
+        {
+            return lieu;
+        }
+        public string raison_deces()
+        {
+            return raison;
+        }
         public static void Aggravation_Amelioration()
         {
-            int test = rand.Next(0, 2);
-            if (test == 1)
+            int test = rand.Next(0, 5);
+            if (test == 4)
             {
                 Console.WriteLine("\n etat amélioré \n");
                 ameliore = true;
@@ -22,6 +39,19 @@ namespace covidPatient
             else
             {
                 Console.WriteLine("\n décès du patient en raison de l'aggravation \n");
+
+                Console.WriteLine("entrer la date de deces : (JJ/MM/YYYY  H:M:S )");
+                dateDeces = DateTime.Parse(Console.ReadLine());
+
+                Console.WriteLine("entrer dans le lieu du décès \n");
+                lieu = Console.ReadLine();
+
+                Console.WriteLine("entrer dans la raison de la mort : \n");
+                raison = Console.ReadLine();
+
+                // add death cases
+                persistance pr2 = new persistance();
+                pr2.insertDeath();
 
             }
 

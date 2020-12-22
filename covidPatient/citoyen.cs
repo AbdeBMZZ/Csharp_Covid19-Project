@@ -6,15 +6,16 @@ namespace covidPatient
 {
     class citoyen
     {
-        protected string name;
-        protected int age;
-        protected string cin;
-        protected string address;
-        protected bool CWIC; // contact With Infected Case
-        protected bool Symptoms;
-        protected string code;
-        private bool estVaccine;
-        
+        public string name;
+        public int age;
+        public string cin;
+        public string address;
+        public bool CWIC; // contact With Infected Case
+        public bool Symptoms;
+        public string code;
+        public bool estVaccine;
+
+        public static DateTime patient_date;
         public citoyen()
         {
 
@@ -49,6 +50,12 @@ namespace covidPatient
                 Symptoms = false;
             else if (reponse2 == "oui")
                 Symptoms = true;
+
+
+            // persistance citoyen
+
+            persistance persistanceCitoyen = new persistance();
+            persistanceCitoyen.insertCitoyen(this);
 
 
             if (CWIC==true && Symptoms == true)
@@ -87,6 +94,8 @@ namespace covidPatient
                 }
             }
 
+
+            
         }
         public void faireTest()
         {
@@ -122,8 +131,15 @@ namespace covidPatient
 
                     Console.WriteLine("vous avez testé positif pour covid \n");
 
-                    patient p1 = new patient();
+                    Console.WriteLine("veuillez entrer la date d'infection : (JJ/MM/YYYY)");
+                    patient_date = DateTime.Parse(Console.ReadLine());
 
+                    persistance persistancePatient = new persistance();
+                    persistancePatient.insertPatient(this);
+
+                    patient p1 = new patient();
+                    persistance pr1 = new persistance();
+                    pr1.insertPatient(this);
                     if (code == "orange")
                     {
                         p1.passerQuarantaine();

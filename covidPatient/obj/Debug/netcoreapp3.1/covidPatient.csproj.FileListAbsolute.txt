@@ -7,7 +7,14 @@ C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\co
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csprojAssemblyReference.cache
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.AssemblyInfoInputs.cache
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.AssemblyInfo.cs
-C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csproj.CoreCompileInputs.cache
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.dll
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.pdb
 C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.genruntimeconfig.cache
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csproj.CoreCompileInputs.cache
+C:\Users\Eliot\source\repos\covidPatient\covidPatient\obj\Debug\netcoreapp3.1\covidPatient.csproj.CopyComplete
