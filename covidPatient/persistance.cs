@@ -44,7 +44,7 @@ namespace covidPatient
         public void get_possible_cases(string c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT * FROM Citoyen WHERE cin=";
+            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel=";
             cmd.Connection = cnx;
             DataTable dt = new DataTable();
             adapter.Fill(dt);
