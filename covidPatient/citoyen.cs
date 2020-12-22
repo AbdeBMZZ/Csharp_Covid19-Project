@@ -14,72 +14,40 @@ namespace covidPatient
         public bool Symptoms;
         public string code;
         public bool estVaccine;
-
+        public string tel;
         public static DateTime patient_date;
-        public citoyen()
+        public citoyen(string name=null, int age=0, string cin=null, string address=null, bool cwic=false, bool symptoms=false)
         {
+            this.name = name;
+            this.age = age;
+            this.cin = cin;
+            this.address = address;
+            this.CWIC = cwic;
+            this.Symptoms = symptoms;
 
-        }
+            persistance pr = new persistance();
+            pr.insertCitoyen(this);
 
-        public void setInfo()
-        {
-            Console.WriteLine("votre nom complet : ");
-            name = Console.ReadLine();
-
-            Console.WriteLine("votre age : ");
-            age = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("votre cin : ");
-            cin = Console.ReadLine();
-
-            Console.WriteLine("votre adresse : ");
-            address = Console.ReadLine();
-
-            Console.WriteLine("avez-vous contacté un cas infecté : (oui ou non) ");
-            string reponse = Console.ReadLine();
-
-            if (reponse == "non")
-                CWIC = false;
-            else if (reponse == "oui")
-                CWIC = true;
-
-            Console.WriteLine("avez-vous les symptômes de covid : (oui ou non) ");
-            string reponse2 = Console.ReadLine();
-
-            if (reponse2 == "non")
-                Symptoms = false;
-            else if (reponse2 == "oui")
-                Symptoms = true;
-
-
-            // persistance citoyen
-
-            persistance persistanceCitoyen = new persistance();
-            persistanceCitoyen.insertCitoyen(this);
-
-
-            if (CWIC==true && Symptoms == true)
+            if(CWIC==true && Symptoms == true)
             {
                 Console.WriteLine("vous devez faire le test immédiatement !! vouloir le faire ?");
-                string reponse3 = Console.ReadLine();
+                string reponse = Console.ReadLine();
                 Console.WriteLine("\n");
 
-                if (reponse3 == "oui")
-                {   
+                if (reponse == "oui")
                     faireTest();
-
-                }
-                else if (reponse3 == "non")
+                else
                 {
                     code = "red";
-                    for(int j = 0; j < 14; j++)
+                    for (int j = 0; j < 14; j++)
                     {
-                        Console.WriteLine("jours sans quarantaine " + j+1);
+                        Console.WriteLine("jours sans quarantaine " + j + 1);
                     }
                     Console.WriteLine("\naggravation du citoyen\n");
                     patient p2 = new patient();
                     p2.enReanimation();
                 }
+
             }
             else
             {
@@ -93,10 +61,8 @@ namespace covidPatient
 
                 }
             }
-
-
-            
         }
+
         public void faireTest()
         {
             if (code == "blue")
@@ -136,6 +102,10 @@ namespace covidPatient
 
                     persistance persistancePatient = new persistance();
                     persistancePatient.insertPatient(this);
+
+                    Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
+                    tel = Console.ReadLine();
+                    
 
                     patient p1 = new patient();
                     persistance pr1 = new persistance();

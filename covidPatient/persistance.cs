@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -19,9 +20,9 @@ namespace covidPatient
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name+ "','" + ct.age + "','" + ct.cin + "','" + ct.address + "')";
             int i = cmd.ExecuteNonQuery();
+            Console.WriteLine("citoyen added ");
             cnx.Close();
         }
-        
         public void insertDeath() 
         {
             cnx.Open();
@@ -31,7 +32,6 @@ namespace covidPatient
                 Console.WriteLine("citoyen added");
             cnx.Close();
         }
-
         public void insertPatient(citoyen ct)
         {
             cnx.Open();
@@ -41,5 +41,14 @@ namespace covidPatient
             cnx.Close();
         }
 
+        public void get_possible_cases(string c)
+        {
+            cnx.Open();
+            cmd.CommandText = "SELECT * FROM Citoyen WHERE cin=";
+            cmd.Connection = cnx;
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            cnx.Close();
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace covidPatient
 {
-    class patient:citoyen
+    class patient : citoyen
     {
         private int nbrJrsQuarantaine = 0;
 

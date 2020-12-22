@@ -5,9 +5,12 @@ namespace covidPatient
     {
         static void Main(string[] args)
         {
-            citoyen person1 = new citoyen();
+            Console.WriteLine("premiere personne ");
+            citoyen person1 = new citoyen("abdellah",19, "r3513355", "mohammedia", false, false);
 
-            person1.setInfo();
+            Console.WriteLine("deuxieme personne ");
+
+            citoyen person2 = new citoyen("karim", 15,"t305335" ,"mohammedia", true, true);
 
         }
     }
