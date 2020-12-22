@@ -18,7 +18,7 @@ namespace covidPatient
             cnx.Open();
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name+ "','" + ct.age + "','" + ct.cin + "','" + ct.address + "')";
-            cmd.ExecuteNonQuery();
+            int i = cmd.ExecuteNonQuery();
             cnx.Close();
         }
         
