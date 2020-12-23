@@ -42,7 +42,7 @@ namespace covidPatient
             cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin + "')";
             int i = cmd.ExecuteNonQuery();
             cnx.Close();
-            Console.WriteLine("nice body");
+            Console.WriteLine("nice buddy");
         }
 
         // cette methode
