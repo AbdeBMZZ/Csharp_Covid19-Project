@@ -32,7 +32,7 @@ namespace covidPatient
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO deces VALUES('" + dtime + "','" + lieu + "','" + raison + "')";
             int i = cmd.ExecuteNonQuery();
-                Console.WriteLine("cas deces added");
+            Console.WriteLine("cas deces added");
             cnx.Close();
         }
         public void insertPatient(citoyen ct, DateTime datePatient)
@@ -42,7 +42,6 @@ namespace covidPatient
             cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin + "')";
             int i = cmd.ExecuteNonQuery();
             cnx.Close();
-            Console.WriteLine("nice buddy");
         }
 
         // cette methode
