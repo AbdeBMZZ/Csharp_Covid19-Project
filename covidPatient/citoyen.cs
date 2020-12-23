@@ -17,19 +17,21 @@ namespace covidPatient
         public string tel;
         public static DateTime patient_date;
 
-        public static string telR()
+        public string telR()
         {
             return tel;
         }
-        public citoyen(string name=null, int age=0, string cin=null, string address=null, bool cwic=false, bool symptoms=false)
+        public citoyen(string cin = null, string name=null, int age=0, string address=null , string tel =null, bool cwic=false, bool symptoms=false)
         {
+
+            this.cin = cin;
             this.name = name;
             this.age = age;
-            this.cin = cin;
             this.address = address;
+            this.tel = tel;
             this.CWIC = cwic;
             this.Symptoms = symptoms;
-
+           
             persistance pr = new persistance();
             pr.insertCitoyen(this);
 

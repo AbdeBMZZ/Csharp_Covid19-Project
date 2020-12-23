@@ -9,7 +9,7 @@ namespace covidPatient
 {
     class persistance
     {
-        static string chaine = @"Data Source = localhost; Initial Catalog = Csharp; Integrated Security = True";
+        static string chaine = @"Data Source = localhost; Initial Catalog = Covid; Integrated Security = True";
         static SqlConnection cnx = new SqlConnection(chaine);
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -18,8 +18,8 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name+ "','" + ct.age + "','" + ct.cin + "','" + ct.address + "')";
-            int i = cmd.ExecuteNonQuery();
+            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name+ "','" + ct.age+ "','" + ct.cin+ "','" + ct.address + "','" + ct.tel + "')";
+            cmd.ExecuteNonQuery();
             Console.WriteLine("citoyen added ");
             cnx.Close();
         }
@@ -44,7 +44,7 @@ namespace covidPatient
         public void get_possible_cases(string c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT name FROM Citoyen WHERE tel="+citoyen.telR();
+            cmd.CommandText = "SELECT name FROM Citoyen WHERE tel=";
             cmd.Connection = cnx;
             DataTable dt = new DataTable();
             adapter.Fill(dt);
