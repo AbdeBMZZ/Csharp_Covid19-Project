@@ -18,8 +18,10 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name+ "','" + ct.age+ "','" + ct.cin+ "','" + ct.address + "','" + ct.tel + "')";
-            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name + "','" + ct.age + "','" + ct.cin + "','" + ct.address + "','" + ct.tel + "')";
+            int i = cmd.ExecuteNonQuery();
+
             Console.WriteLine("citoyen added ");
             cnx.Close();
         }
@@ -28,15 +30,15 @@ namespace covidPatient
             cnx.Open();
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO deces VALUES('" + hopital.dateDeces + "','" + hopital.lieu + "','" + hopital.raison + "')";
-            cmd.ExecuteNonQuery();
-                Console.WriteLine("citoyen added");
+            int i = cmd.ExecuteNonQuery();
+                Console.WriteLine("cas deces added");
             cnx.Close();
         }
-        public void insertPatient(citoyen ct)
+        public void insertPatient(citoyen ct, DateTime datePatient)
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + patient.patient_date + "')";
+            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin +"')";
             int i = cmd.ExecuteNonQuery();
             cnx.Close();
         }

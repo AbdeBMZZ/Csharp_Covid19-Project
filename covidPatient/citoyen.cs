@@ -15,7 +15,11 @@ namespace covidPatient
         public string code;
         public bool estVaccine;
         public string tel;
-        public static DateTime patient_date;
+
+        int jour;
+        int mois;
+        int annee;
+        public DateTime patient_date;
 
         public string telR()
         {
@@ -104,19 +108,31 @@ namespace covidPatient
 
                     Console.WriteLine("vous avez testé positif pour covid \n");
 
-                    Console.WriteLine("veuillez entrer la date d'infection : (JJ/MM/YYYY)");
-                    patient_date = DateTime.Parse(Console.ReadLine());
+                    Console.WriteLine("veuillez entrer le jour d'infection : ");
+                    jour = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("veuillez entrer le mois d'infection : ");
+                    mois = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("veuillez entrer l'annee d'infection : ");
+                    annee = int.Parse(Console.ReadLine());
+
+
+                    patient_date.AddDays(jour);
+                    patient_date.AddMonths(mois);
+                    patient_date.AddYears(annee);
 
                     persistance persistancePatient = new persistance();
-                    persistancePatient.insertPatient(this);
+
+                    persistancePatient.insertPatient(this,patient_date);
 
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
                     
 
                     patient p1 = new patient();
-                    persistance pr1 = new persistance();
-                    pr1.insertPatient(this);
+
+
                     if (code == "orange")
                     {
                         p1.passerQuarantaine();
