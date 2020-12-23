@@ -16,6 +16,11 @@ namespace covidPatient
         public bool estVaccine;
         public string tel;
         public static DateTime patient_date;
+
+        public static string telR()
+        {
+            return tel;
+        }
         public citoyen(string name=null, int age=0, string cin=null, string address=null, bool cwic=false, bool symptoms=false)
         {
             this.name = name;

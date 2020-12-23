@@ -44,10 +44,11 @@ namespace covidPatient
         public void get_possible_cases(string c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel=";
+            cmd.CommandText = "SELECT name FROM Citoyen WHERE tel="+citoyen.telR();
             cmd.Connection = cnx;
             DataTable dt = new DataTable();
             adapter.Fill(dt);
+
             cnx.Close();
         }
     }
