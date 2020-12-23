@@ -109,11 +109,11 @@ namespace covidPatient
                     Console.WriteLine("vous avez testé positif pour covid \n");
                     persistance pr2 = new persistance();
 
-                    Console.Write("Enter a month: ");
+                    Console.Write("Enter month of infection: ");
                     int month = int.Parse(Console.ReadLine());
-                    Console.Write("Enter a day: ");
+                    Console.Write("Enter day of infection: ");
                     int day = int.Parse(Console.ReadLine());
-                    Console.Write("Enter a year: ");
+                    Console.Write("Enter year of infection: ");
                     int year = int.Parse(Console.ReadLine());
 
                     DateTime DateP = new DateTime(year, month, day);
