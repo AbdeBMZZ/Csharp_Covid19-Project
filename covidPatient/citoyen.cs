@@ -107,28 +107,23 @@ namespace covidPatient
                         code = "red";
 
                     Console.WriteLine("vous avez testé positif pour covid \n");
+                    persistance pr2 = new persistance();
 
-                    Console.WriteLine("veuillez entrer le jour d'infection : ");
-                    jour = int.Parse(Console.ReadLine());
+                    Console.Write("Enter a month: ");
+                    int month = int.Parse(Console.ReadLine());
+                    Console.Write("Enter a day: ");
+                    int day = int.Parse(Console.ReadLine());
+                    Console.Write("Enter a year: ");
+                    int year = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("veuillez entrer le mois d'infection : ");
-                    mois = int.Parse(Console.ReadLine());
+                    DateTime DateP = new DateTime(year, month, day);
 
-                    Console.WriteLine("veuillez entrer l'annee d'infection : ");
-                    annee = int.Parse(Console.ReadLine());
-
-
-                    patient_date.AddDays(jour);
-                    patient_date.AddMonths(mois);
-                    patient_date.AddYears(annee);
-
-                    persistance persistancePatient = new persistance();
-
-                    persistancePatient.insertPatient(this,patient_date);
+                    pr2.insertPatient(this, DateP);
 
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
-                    
+
+
 
                     patient p1 = new patient();
 

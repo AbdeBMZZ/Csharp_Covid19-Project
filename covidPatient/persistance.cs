@@ -24,12 +24,13 @@ namespace covidPatient
 
             Console.WriteLine("citoyen added ");
             cnx.Close();
+
         }
-        public void insertDeath() 
+        public void insertDeath(DateTime dtime, string lieu, string raison) 
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO deces VALUES('" + hopital.dateDeces + "','" + hopital.lieu + "','" + hopital.raison + "')";
+            cmd.CommandText = "INSERT INTO deces VALUES('" + dtime + "','" + lieu + "','" + raison + "')";
             int i = cmd.ExecuteNonQuery();
                 Console.WriteLine("cas deces added");
             cnx.Close();
@@ -38,19 +39,38 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin +"')";
+            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin + "')";
             int i = cmd.ExecuteNonQuery();
             cnx.Close();
+            Console.WriteLine("nice body");
         }
 
-        public void get_possible_cases(string c)
+        // cette methode
+
+        public void get_possible_cases(citoyen c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT name FROM Citoyen WHERE tel=";
+            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel="+c.tel +"";
             cmd.Connection = cnx;
+            cmd.ExecuteNonQuery();
+            
             DataTable dt = new DataTable();
             adapter.Fill(dt);
+            int i = 0;
+            foreach (DataRow dataRow in dt.Rows)
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("suspect case numero : " + ++i);
 
+                foreach (var item in dataRow.ItemArray)
+                {
+
+                    Console.WriteLine(item);
+                    
+                }
+                Console.WriteLine("\n");
+
+            }
             cnx.Close();
         }
     }

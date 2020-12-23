@@ -43,15 +43,25 @@ namespace covidPatient
                 Console.WriteLine("entrer la date de deces : (JJ/MM/YYYY  H:M:S )");
                 dateDeces = DateTime.Parse(Console.ReadLine());
 
-                Console.WriteLine("entrer dans le lieu du décès \n");
-                lieu = Console.ReadLine();
+                Console.Write("Enter a month: ");
+                int month = int.Parse(Console.ReadLine());
+                Console.Write("Enter a day: ");
+                int day = int.Parse(Console.ReadLine());
+                Console.Write("Enter a year: ");
+                int year = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("entrer dans la raison de la mort : \n");
-                raison = Console.ReadLine();
+                DateTime date_D = new DateTime(year, month, day);
+
+                Console.WriteLine("entrer le lieu du deces ");
+                string lieu = Console.ReadLine();
+
+                Console.WriteLine("entrer le raison du deces ");
+                string raison = Console.ReadLine();
 
                 // add death cases
                 persistance pr2 = new persistance();
-                pr2.insertDeath();
+
+                pr2.insertDeath(date_D, lieu,raison);
 
             }
 
