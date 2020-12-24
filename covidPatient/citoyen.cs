@@ -122,8 +122,7 @@ namespace covidPatient
 
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
-
-
+                    pr2.get_possible_cases(tel);
 
                     patient p1 = new patient();
 

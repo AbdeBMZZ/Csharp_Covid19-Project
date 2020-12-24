@@ -46,10 +46,10 @@ namespace covidPatient
 
         // cette methode
 
-        public void get_possible_cases(citoyen c)
+        public void get_possible_cases(string c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel="+c.tel +"";
+            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel="+ c +"";
             cmd.Connection = cnx;
             cmd.ExecuteNonQuery();
             
