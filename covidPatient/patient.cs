@@ -4,7 +4,7 @@ using System.Text;
 
 namespace covidPatient
 {
-    class patient : citoyen
+    class Patient : citoyen
     {
         private int nbrJrsQuarantaine = 0;
 
@@ -29,7 +29,7 @@ namespace covidPatient
         }
         public void refaireTest()
         {
-            if (Symptoms == false && nbrJrsQuarantaine==14 || hopital.Ameliore())
+            if (Symptoms == false && nbrJrsQuarantaine==14)
             {
                 Console.WriteLine("\nTu as guéri de covid, tu peux rentrer à la maison");
             }
@@ -41,9 +41,10 @@ namespace covidPatient
 
             }
         }
-        public void enReanimation()
+        public void enReanimation(citoyen ct =null)
         {
-            hopital.Reanimation();
+            Hopital hp = new Hopital();
+            hp.Reanimation(ct);
         }
     }
 }

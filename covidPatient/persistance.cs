@@ -9,7 +9,7 @@ namespace covidPatient
 {
     class persistance
     {
-        static string chaine = @"Data Source = localhost; Initial Catalog = Covid; Integrated Security = True";
+        static string chaine = @"Data Source = localhost; Initial Catalog = Covid19; Integrated Security = True";
         static SqlConnection cnx = new SqlConnection(chaine);
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -19,27 +19,27 @@ namespace covidPatient
             cnx.Open();
             cmd.Connection = cnx;
 
-            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.name + "','" + ct.age + "','" + ct.cin + "','" + ct.address + "','" + ct.tel + "')";
+            cmd.CommandText = "INSERT INTO citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
             int i = cmd.ExecuteNonQuery();
 
             Console.WriteLine("citoyen added ");
             cnx.Close();
 
         }
-        public void insertDeath(DateTime dtime, string lieu, string raison) 
+        public void insertDeath(citoyen ct,string dtime, string lieu, string raison) 
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO deces VALUES('" + dtime + "','" + lieu + "','" + raison + "')";
+            cmd.CommandText = "INSERT INTO death VALUES('" + ct.cin + "','" + ct.name + "','" + dtime+ "','" + lieu + "','" + raison + "')";
             int i = cmd.ExecuteNonQuery();
             Console.WriteLine("cas deces added");
             cnx.Close();
         }
-        public void insertPatient(citoyen ct, DateTime datePatient)
+        public void insertPatient(citoyen ct, string datePatient)
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.name + "','" + datePatient + "','" + ct.cin + "')";
+            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.cin + "','" + ct.name + "','" + datePatient + "')";
             int i = cmd.ExecuteNonQuery();
             cnx.Close();
         }
@@ -47,7 +47,7 @@ namespace covidPatient
         public void get_possible_cases(string c)
         {
             cnx.Open();
-            cmd.CommandText = "SELECT * FROM Citoyen WHERE tel="+ c +"";
+            cmd.CommandText = "SELECT * FROM citoyen WHERE citoyen_tel="+ c +"";
             cmd.Connection = cnx;
             cmd.ExecuteNonQuery();
             

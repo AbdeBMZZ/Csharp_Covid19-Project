@@ -4,53 +4,32 @@ using System.Text;
 
 namespace covidPatient
 {
-    class hopital
+    class Hopital
     {
         private static int ReanimationNbrJrs = 0;
         static Random rand = new Random();
         static bool ameliore = false;
-        public static DateTime dateDeces;
-        public static string lieu;
-        public static string raison;
-
-        public DateTime date_deces()
+        public void Aggravation_Amelioration(citoyen c = null)
         {
-            return dateDeces;
-        }
-
-        public string lieu_deces()
-        {
-            return lieu;
-        }
-        public string raison_deces()
-        {
-            return raison;
-        }
-        public static void Aggravation_Amelioration()
-        {
-            int test = rand.Next(0, 5);
-            if (test == 4)
+            int test = rand.Next(0, 2);
+            if (test == 1)
             {
                 Console.WriteLine("\n etat amélioré \n");
                 ameliore = true;
-                patient p1 = new patient();
+                Patient p1 = new Patient();
                 p1.passerQuarantaine();
             }
             else
             {
                 Console.WriteLine("\n décès du patient en raison de l'aggravation \n");
 
-                Console.WriteLine("entrer la date de deces : (JJ/MM/YYYY  H:M:S )");
-                dateDeces = DateTime.Parse(Console.ReadLine());
 
-                Console.Write("Enter a month: ");
-                int month = int.Parse(Console.ReadLine());
-                Console.Write("Enter a day: ");
-                int day = int.Parse(Console.ReadLine());
-                Console.Write("Enter a year: ");
-                int year = int.Parse(Console.ReadLine());
+                // insert death :
 
-                DateTime date_D = new DateTime(year, month, day);
+                Console.WriteLine("entrer la date de deces : (JJ/MM/YYYY)");
+
+                DateTime dt = DateTime.Now;
+                string format = Console.ReadLine();
 
                 Console.WriteLine("entrer le lieu du deces ");
                 string lieu = Console.ReadLine();
@@ -59,15 +38,17 @@ namespace covidPatient
                 string raison = Console.ReadLine();
 
                 // add death cases
-                persistance pr2 = new persistance();
+                persistance pr3 = new persistance();
 
-                pr2.insertDeath(date_D, lieu,raison);
+                pr3.insertDeath(c,dt.ToString(format), lieu,raison);
+
+
 
             }
 
         }
 
-        public static bool Ameliore()
+        public bool Ameliore()
         {
             if (ameliore == true)
                 return true;
@@ -75,7 +56,7 @@ namespace covidPatient
                 return false;
 
         }
-        public static void Reanimation()
+        public void Reanimation(citoyen ct)
         {
             for(int i = 0; i < 7; i++)
             {
@@ -84,7 +65,7 @@ namespace covidPatient
 
             }
 
-            Aggravation_Amelioration();
+            Aggravation_Amelioration(ct);
 
 
         }

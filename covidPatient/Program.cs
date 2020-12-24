@@ -5,8 +5,7 @@ namespace covidPatient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("premiere personne ");
-            citoyen person1 = new citoyen("K303531", "karim", 29, "casa","0719222550", true, true);
+            citoyen ct = new citoyen("R30535", "abdo", 89, "dubai", "079225512", true, true);
 
         }
     }

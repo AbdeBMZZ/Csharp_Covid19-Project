@@ -16,11 +16,6 @@ namespace covidPatient
         public bool estVaccine;
         public string tel;
 
-        int jour;
-        int mois;
-        int annee;
-        public DateTime patient_date;
-
         public string telR()
         {
             return tel;
@@ -55,8 +50,8 @@ namespace covidPatient
                         Console.WriteLine("jours sans quarantaine " + j + 1);
                     }
                     Console.WriteLine("\naggravation du citoyen\n");
-                    patient p2 = new patient();
-                    p2.enReanimation();
+                    Patient p2 = new Patient();
+                    p2.enReanimation(this);
                 }
 
             }
@@ -109,22 +104,23 @@ namespace covidPatient
                     Console.WriteLine("vous avez testé positif pour covid \n");
                     persistance pr2 = new persistance();
 
-                    Console.Write("Enter month of infection: ");
-                    int month = int.Parse(Console.ReadLine());
-                    Console.Write("Enter day of infection: ");
-                    int day = int.Parse(Console.ReadLine());
-                    Console.Write("Enter year of infection: ");
-                    int year = int.Parse(Console.ReadLine());
+                    //date d'infection 
+                    Console.WriteLine("entrer la date d'infection : (MM/JJ/YYYY)");
 
-                    DateTime DateP = new DateTime(year, month, day);
 
-                    pr2.insertPatient(this, DateP);
+                    DateTime dt = DateTime.Now;
+                    string format = Console.ReadLine();
 
+                    pr2.insertPatient(this, dt.ToString(format));
+
+
+                    //trouver les ci
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
+
                     pr2.get_possible_cases(tel);
 
-                    patient p1 = new patient();
+                    Patient p1 = new Patient();
 
 
                     if (code == "orange")
