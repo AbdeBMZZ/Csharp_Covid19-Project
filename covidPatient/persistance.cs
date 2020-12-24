@@ -21,8 +21,11 @@ namespace covidPatient
 
             cmd.CommandText = "INSERT INTO citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
             int i = cmd.ExecuteNonQuery();
+            if(i==5)
+                Console.WriteLine("citoyen added ");
+            else
+                cmd.Cancel();
 
-            Console.WriteLine("citoyen added ");
             cnx.Close();
 
         }
@@ -32,7 +35,11 @@ namespace covidPatient
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO death VALUES('" + ct.cin + "','" + ct.name + "','" + dtime+ "','" + lieu + "','" + raison + "')";
             int i = cmd.ExecuteNonQuery();
-            Console.WriteLine("cas deces added");
+            if (i == 5)
+                Console.WriteLine("death cas added ");
+            else
+                cmd.Cancel();
+
             cnx.Close();
         }
         public void insertPatient(citoyen ct, string datePatient)
@@ -41,6 +48,11 @@ namespace covidPatient
             cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO patient VALUES('" + ct.cin + "','" + ct.name + "','" + datePatient + "')";
             int i = cmd.ExecuteNonQuery();
+            if (i == 5)
+                Console.WriteLine("patient added ");
+            else
+                cmd.Cancel();
+                    
             cnx.Close();
         }
 

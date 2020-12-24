@@ -60,8 +60,7 @@ namespace covidPatient
         {
             for(int i = 0; i < 7; i++)
             {
-                ReanimationNbrJrs++;
-                Console.WriteLine("en Reanimation jour " + ReanimationNbrJrs);
+                Console.WriteLine("en Reanimation jour " + ++ReanimationNbrJrs);
 
             }
 

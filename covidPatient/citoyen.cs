@@ -32,6 +32,7 @@ namespace covidPatient
             this.Symptoms = symptoms;
            
             persistance pr = new persistance();
+            
             pr.insertCitoyen(this);
 
             if(CWIC==true && Symptoms == true)
@@ -114,7 +115,7 @@ namespace covidPatient
                     pr2.insertPatient(this, dt.ToString(format));
 
 
-                    //trouver les ci
+                    //trouver les cas suspects:
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
 
