@@ -44,8 +44,6 @@ namespace covidPatient
             cnx.Close();
         }
 
-        // cette methode
-
         public void get_possible_cases(string c)
         {
             cnx.Open();
