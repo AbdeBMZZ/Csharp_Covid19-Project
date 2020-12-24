@@ -65,6 +65,7 @@ namespace covidPatient
 
             }
 
+
             Aggravation_Amelioration(ct);
 
 
