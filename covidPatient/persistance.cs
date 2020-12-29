@@ -13,19 +13,27 @@ namespace covidPatient
         static SqlConnection cnx = new SqlConnection(chaine);
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-        
+
+        public static  bool duplicate = false;
         public void insertCitoyen(citoyen ct)
         {
-            cnx.Open();
-            cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
-            int i = cmd.ExecuteNonQuery();
-            if(i==5)
-                Console.WriteLine("citoyen added ");
+            if(CheckDuplicate(ct.cin)){
+                Console.WriteLine("please enter a new citoyen ");
+            }
             else
-                cmd.Cancel();
+            {
+                cnx.Open();
+                cmd.Connection = cnx;
+                cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
+                int i = cmd.ExecuteNonQuery();
+                if (i == 5)
+                    Console.WriteLine("citoyen added ");
+                else
+                    cmd.Cancel();
 
-            cnx.Close();
+                cnx.Close();
+            }
+
 
         }
         public void insertDeath(citoyen ct,string dtime, string lieu, string raison) 
@@ -80,6 +88,29 @@ namespace covidPatient
 
             }
             cnx.Close();
+        }
+
+        bool CheckDuplicate(string cin)
+        {
+            int citoyenCount = 0;
+            cnx.Open();
+            if (cnx.State == System.Data.ConnectionState.Open)
+            {
+                cmd.CommandText="select count(*) from Citoyen where citoyen_cin= @cin ";
+                cmd.Connection = cnx;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@cin", cin);
+                citoyenCount = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            cnx.Close();
+            if (citoyenCount > 0)
+            {
+                duplicate = true;
+                return true;
+
+            }
+
+            return false;
         }
     }
 }

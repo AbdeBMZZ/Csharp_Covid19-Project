@@ -58,13 +58,15 @@ namespace covidPatient
             }
             else
             {
-                Console.WriteLine("faire le test ? ");
-                string reponse4 = Console.ReadLine();
-                Console.WriteLine("\n");
-
-                if (reponse4 == "oui")
+                if (persistance.duplicate == false)
                 {
-                    faireTest();
+                    Console.WriteLine("faire le test ? ");
+                    string reponse4 = Console.ReadLine();
+                    Console.WriteLine("\n");
+
+                    if (reponse4 == "oui")
+                        faireTest();
+
 
                 }
             }
