@@ -15,7 +15,7 @@ namespace covidPatient
         public string code;
         public bool estVaccine;
         public string tel;
-
+        persistance pr = new persistance();
         public string telR()
         {
             return tel;
@@ -30,12 +30,12 @@ namespace covidPatient
             this.tel = tel;
             this.CWIC = cwic;
             this.Symptoms = symptoms;
-           
-            persistance pr = new persistance();
-            
+        }
+        public void suspect()
+        {
             pr.insertCitoyen(this);
 
-            if(CWIC==true && Symptoms == true)
+            if (CWIC == true && Symptoms == true)
             {
                 Console.WriteLine("vous devez faire le test immédiatement !! vouloir le faire ?");
                 string reponse = Console.ReadLine();
@@ -45,13 +45,13 @@ namespace covidPatient
                     faireTest();
                 else
                 {
+                    Patient p2 = new Patient();
                     code = "red";
                     for (int j = 0; j < 14; j++)
                     {
                         Console.WriteLine("jours sans quarantaine " + j + 1);
                     }
                     Console.WriteLine("\naggravation du citoyen\n");
-                    Patient p2 = new Patient();
                     p2.enReanimation(this);
                 }
 
@@ -103,8 +103,7 @@ namespace covidPatient
                         code = "red";
 
                     Console.WriteLine("vous avez testé positif pour covid \n");
-                    persistance pr2 = new persistance();
-
+                    Patient p1 = new Patient();
                     //date d'infection 
                     Console.WriteLine("entrer la date d'infection : (MM/JJ/YYYY)");
 
@@ -112,21 +111,20 @@ namespace covidPatient
                     DateTime dt = DateTime.Now;
                     string format = Console.ReadLine();
 
-                    pr2.insertPatient(this, dt.ToString(format));
+                    pr.insertPatient(this, dt.ToString(format));
 
 
                     //trouver les cas suspects:
                     Console.WriteLine("entrez les numéros de téléphone des personnes avec lesquelles vous avez pris contact");
                     tel = Console.ReadLine();
 
-                    pr2.get_possible_cases(tel);
+                    pr.get_possible_cases(tel);
 
-                    Patient p1 = new Patient();
 
 
                     if (code == "orange")
                     {
-                        p1.passerQuarantaine();
+                        p1.passerQuarantaine(this);
                     }
                     else if (code == "red")
                     {

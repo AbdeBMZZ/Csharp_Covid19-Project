@@ -5,8 +5,8 @@ namespace covidPatient
     {
         static void Main(string[] args)
         {
-            citoyen ct = new citoyen("hh30535", "abdo", 89, "mohammedia", "079225512", true, true);
-
+            citoyen ct = new citoyen("H221", "Ahmed", 99, "tangier", "08125512", true, true);
+            ct.suspect();
         }
     }
 }

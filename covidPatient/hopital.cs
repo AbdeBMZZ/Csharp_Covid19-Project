@@ -17,7 +17,7 @@ namespace covidPatient
                 Console.WriteLine("\n etat amélioré \n");
                 ameliore = true;
                 Patient p1 = new Patient();
-                p1.passerQuarantaine();
+                p1.passerQuarantaine(c);
             }
             else
             {
@@ -26,7 +26,7 @@ namespace covidPatient
 
                 // insert death :
 
-                Console.WriteLine("entrer la date de deces : (JJ/MM/YYYY)");
+                Console.WriteLine("entrer la date de deces : (MM/JJ/YYYY)");
 
                 DateTime dt = DateTime.Now;
                 string format = Console.ReadLine();

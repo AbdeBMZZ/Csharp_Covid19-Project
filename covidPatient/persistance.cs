@@ -9,7 +9,7 @@ namespace covidPatient
 {
     class persistance
     {
-        static string chaine = @"Data Source = localhost; Initial Catalog = Covid19; Integrated Security = True";
+        static string chaine = @"Data Source = localhost; Initial Catalog = Covid; Integrated Security = True";
         static SqlConnection cnx = new SqlConnection(chaine);
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -18,8 +18,7 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-
-            cmd.CommandText = "INSERT INTO citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
+            cmd.CommandText = "INSERT INTO Citoyen VALUES('" + ct.cin + "','" + ct.name + "','" + ct.age + "','" + ct.tel + "','" + ct.address + "')";
             int i = cmd.ExecuteNonQuery();
             if(i==5)
                 Console.WriteLine("citoyen added ");
@@ -33,7 +32,7 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO death VALUES('" + ct.cin + "','" + ct.name + "','" + dtime+ "','" + lieu + "','" + raison + "')";
+            cmd.CommandText = "INSERT INTO Death VALUES('" + ct.cin + "','" + ct.name + "','" + dtime+ "','" + lieu + "','" + raison + "')";
             int i = cmd.ExecuteNonQuery();
             if (i == 5)
                 Console.WriteLine("death cas added ");
@@ -46,7 +45,7 @@ namespace covidPatient
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "INSERT INTO patient VALUES('" + ct.cin + "','" + ct.name + "','" + datePatient + "')";
+            cmd.CommandText = "INSERT INTO Patient VALUES('" + ct.cin + "','" + ct.name + "','" + datePatient + "')";
             int i = cmd.ExecuteNonQuery();
             if (i == 5)
                 Console.WriteLine("patient added ");
