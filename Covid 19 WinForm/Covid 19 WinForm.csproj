@@ -46,6 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="add citoyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add citoyen.Designer.cs">
+      <DependentUpon>add citoyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Covid_winFormDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="en attente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="en attente.Designer.cs">
+      <DependentUpon>en attente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +71,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="add citoyen.resx">
+      <DependentUpon>add citoyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="en attente.resx">
+      <DependentUpon>en attente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +89,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Covid_winFormDataSet.xsc">
+      <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Covid_winFormDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Covid_winFormDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Covid_winFormDataSet.xss">
+      <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

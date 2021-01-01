@@ -1,0 +1,12 @@
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\bin\Debug\Covid 19 WinForm.exe.config
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\bin\Debug\Covid 19 WinForm.exe
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\bin\Debug\Covid 19 WinForm.pdb
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 WinForm.csprojAssemblyReference.cache
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.Form1.resources
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.Properties.Resources.resources
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 WinForm.csproj.GenerateResource.cache
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 WinForm.csproj.CoreCompileInputs.cache
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 WinForm.exe
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 WinForm.pdb
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.add_citoyen.resources
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.en_attente.resources

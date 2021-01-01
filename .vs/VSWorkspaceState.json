@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Covid 19 WinForm",
+    "\\UI"
   ],
-  "SelectedNode": "\\covidPatient.sln",
+  "SelectedNode": "\\Covid 19 WinForm\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
