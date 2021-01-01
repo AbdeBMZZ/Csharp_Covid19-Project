@@ -22,7 +22,7 @@ namespace Covid_19_WinForm
                 con.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataTable dt = new DataTable();
-                adapter.SelectCommand = new SqlCommand("SELECT * FROM citoyen", con);
+                adapter.SelectCommand = new SqlCommand("SELECT citoyen.citoyen_cin As CIN, citoyen.citoyen_name As Name, citoyen.citoyen_address As Address,test.test_res As Result FROM citoyen,test", con);
                 adapter.Fill(dt);
                 dataGridView1.DataSource = dt;
                 con.Close();

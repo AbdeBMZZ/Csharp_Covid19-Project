@@ -1,6 +1,6 @@
 ﻿namespace Covid_19_WinForm
 {
-    partial class en_attente
+    partial class testing
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.components = new System.ComponentModel.Container();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // progressBar1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(542, 287);
-            this.dataGridView1.TabIndex = 0;
+            this.progressBar1.Location = new System.Drawing.Point(120, 55);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(264, 38);
+            this.progressBar1.TabIndex = 0;
             // 
-            // en_attente
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 32;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // testing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 287);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "en_attente";
+            this.ClientSize = new System.Drawing.Size(484, 161);
+            this.Controls.Add(this.progressBar1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "testing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "testing";
+            this.Load += new System.EventHandler(this.testing_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

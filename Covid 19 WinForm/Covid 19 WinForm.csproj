@@ -71,6 +71,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testing.Designer.cs">
+      <DependentUpon>testing.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="add citoyen.resx">
       <DependentUpon>add citoyen.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +95,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="testing.resx">
+      <DependentUpon>testing.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Covid_winFormDataSet.xsc">
       <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
     </None>

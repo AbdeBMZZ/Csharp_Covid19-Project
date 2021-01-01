@@ -29,8 +29,20 @@ namespace Covid_19_WinForm
                 {
                     con.Open();
                     SqlCommand command = new SqlCommand();
+                    SqlCommand command2 = new SqlCommand();
                     command.Connection = con;
+                    command2.Connection = con;
+
                     command.CommandText = "INSERT INTO citoyen VALUES(@cin, @name, @birth, @address,@code)";
+                    command2.CommandText = "INSERT INTO test VALUES(@test_res, @cin)";
+
+                    if (radioButton2.Checked == true && radioButton4.Checked == true)
+
+                        command2.Parameters.AddWithValue("@test_res", "NEGATIF");
+                    else
+                        command2.Parameters.AddWithValue("@test_res", "POSITIF");
+                    command2.Parameters.AddWithValue("@cin", cinText.Text);
+
                     command.Parameters.AddWithValue("@cin", cinText.Text);
                     command.Parameters.AddWithValue("@name", nomText.Text);
                     command.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
@@ -43,6 +55,8 @@ namespace Covid_19_WinForm
                     try
                     {
                         int recordsAffected = command.ExecuteNonQuery();
+                        int recordsAffected2 = command2.ExecuteNonQuery();
+
                     }
                     catch (Exception ex)
                     {
@@ -51,10 +65,13 @@ namespace Covid_19_WinForm
                     finally
                     {
                         con.Close();
+                        testing t = new testing();
+                        t.Show();
                     }
                 }
                 else
                     MessageBox.Show("abdo");
+
 
             }
         }

@@ -26,12 +26,14 @@ namespace Covid_19_WinForm
         {
             add_citoyen f = new add_citoyen();
             f.Show();
+
         }
 
         private void en_attente_Click(object sender, EventArgs e)
         {
             en_attente eA = new en_attente();
             eA.Show();
+            
         }
 
         private void suivre_Click(object sender, EventArgs e)

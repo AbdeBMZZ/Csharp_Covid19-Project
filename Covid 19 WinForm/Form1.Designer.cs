@@ -62,7 +62,7 @@
             this.en_attente.Name = "en_attente";
             this.en_attente.Size = new System.Drawing.Size(150, 84);
             this.en_attente.TabIndex = 2;
-            this.en_attente.Text = "Personnes en attente d\'un résultat de PCR";
+            this.en_attente.Text = "les personnes qui ont passé le test";
             this.en_attente.UseVisualStyleBackColor = true;
             this.en_attente.Click += new System.EventHandler(this.en_attente_Click);
             // 
