@@ -71,16 +71,92 @@ namespace Covid_19_WinForm
                     finally
                     {
                         con.Close();
+                        testing t = new testing();
+                        t.Show();
                     }
                 }
                 else
-                    MessageBox.Show("abdo");
+                    MessageBox.Show("please check your informations");
 
 
             }
 
-            testing t = new testing();
-            t.Show();
+
+        }
+
+        private void faire_vaccin_Click(object sender, EventArgs e)
+        {
+
+            using (SqlConnection con = new SqlConnection(chaine))
+            {
+                if (cinText.Text != "" && nomText.Text != "" && addressText.Text != "")
+                {
+                    con.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = con;
+
+                    command.CommandText = "INSERT INTO vaccin VALUES(@datevaccin,@cin, @name,@birth, @address)";
+
+                    command.Parameters.AddWithValue("@datevaccin", dateTimePicker1.Value.ToString());
+                    command.Parameters.AddWithValue("@cin", cinText.Text);
+                    command.Parameters.AddWithValue("@name", nomText.Text);
+                    command.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
+                    command.Parameters.AddWithValue("@address", addressText.Text);
+
+
+                    try
+                    {
+                        int recordsAffected = command.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        con.Close();
+
+                    }
+                }
+                else
+                    MessageBox.Show("please check your informations");
+
+
+            }
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton6.Checked == true)
+            {
+                label8.Visible = true;
+                dateTimePicker1.Visible = true;
+                flowLayoutPanel1.Visible = false;
+                flowLayoutPanel2.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+
+                faire_vaccin.Visible = true;
+                button1.Visible = false;
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked == true)
+            {
+                label8.Visible = false;
+                dateTimePicker1.Visible = false;
+                flowLayoutPanel1.Visible = true;
+                flowLayoutPanel2.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+
+
+                faire_vaccin.Visible = false;
+                button1.Visible = true;
+            }
         }
     }
 }

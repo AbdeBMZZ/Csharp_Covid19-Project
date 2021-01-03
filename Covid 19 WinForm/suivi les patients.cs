@@ -82,9 +82,9 @@ namespace Covid_19_WinForm
 
             s = 0;
             t.Start();
+            dataGridView1.Visible = true;
             dataGridView3.Visible = false;
             dataGridView2.Visible = false;
-            dataGridView1.Visible = true;
             SqlConnection con = new SqlConnection(chaine);
             SqlCommand cmd = new SqlCommand("SELECT citoyen.citoyen_cin as CIN, citoyen.citoyen_name as Name, citoyen.citoyen_address as Address, test.test_res as PCR FROM citoyen,test WHERE  citoyen.citoyen_cin=test.citoyen_cin and test.test_res = @res", con);
             con.Open();
@@ -111,10 +111,7 @@ namespace Covid_19_WinForm
         {
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
+
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
@@ -149,6 +146,7 @@ namespace Covid_19_WinForm
                         row.DefaultCellStyle.ForeColor = Color.Green;
                         insertGueris(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
                         deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
+                        MessageBox.Show("le patient " + row.Cells["Name"].Value.ToString() + " a guéri définitivement de covid-19");
                     }
 
                 }
@@ -257,9 +255,9 @@ namespace Covid_19_WinForm
 
         private void gueris_btn_Click(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
-            dataGridView2.Visible = false;
             dataGridView3.Visible = true;
+            dataGridView2.Visible = false;
+            dataGridView1.Visible = false;
 
             SqlConnection con = new SqlConnection(chaine);
             SqlCommand cmd = new SqlCommand("SELECT gueri_cin as CIN, gueri_name as Name, gueri_address as Address  FROM gueri ", con);
@@ -280,9 +278,9 @@ namespace Covid_19_WinForm
 
         private void en_reanimation_btn_Click_1(object sender, EventArgs e)
         {
+            dataGridView2.Visible = true;
             dataGridView1.Visible = false;
             dataGridView3.Visible = false;
-            dataGridView2.Visible = true;
             t.Stop();
 
             SqlConnection con = new SqlConnection(chaine);
@@ -300,6 +298,11 @@ namespace Covid_19_WinForm
 
 
             con.Close();
+        }
+
+        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.BackColor = Color.LightGreen;
         }
     }
 }

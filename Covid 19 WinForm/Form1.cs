@@ -41,5 +41,11 @@ namespace Covid_19_WinForm
             suivi_les_patients t = new suivi_les_patients();
             t.Show();
         }
+
+        private void vaccin_Click(object sender, EventArgs e)
+        {
+            vaccinated v = new vaccinated();
+            v.Show();
+        }
     }
 }

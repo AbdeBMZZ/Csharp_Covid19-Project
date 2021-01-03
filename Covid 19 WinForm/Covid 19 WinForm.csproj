@@ -84,6 +84,12 @@
     <Compile Include="testing.Designer.cs">
       <DependentUpon>testing.cs</DependentUpon>
     </Compile>
+    <Compile Include="vaccinated.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vaccinated.Designer.cs">
+      <DependentUpon>vaccinated.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="add citoyen.resx">
       <DependentUpon>add citoyen.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="testing.resx">
       <DependentUpon>testing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vaccinated.resx">
+      <DependentUpon>vaccinated.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Covid_winFormDataSet.xsc">
       <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
