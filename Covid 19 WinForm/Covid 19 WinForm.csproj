@@ -71,6 +71,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="suivi les patients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="suivi les patients.Designer.cs">
+      <DependentUpon>suivi les patients.cs</DependentUpon>
+    </Compile>
     <Compile Include="testing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="suivi les patients.resx">
+      <DependentUpon>suivi les patients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="testing.resx">
       <DependentUpon>testing.cs</DependentUpon>
     </EmbeddedResource>

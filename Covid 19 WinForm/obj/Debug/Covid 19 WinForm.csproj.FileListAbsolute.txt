@@ -11,3 +11,4 @@ C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid 19 Win
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.add_citoyen.resources
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.en_attente.resources
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.testing.resources
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.suivi_les_patients.resources

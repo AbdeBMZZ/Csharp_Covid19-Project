@@ -22,12 +22,26 @@ namespace Covid_19_WinForm
                 con.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataTable dt = new DataTable();
-                adapter.SelectCommand = new SqlCommand("SELECT citoyen.citoyen_cin As CIN, citoyen.citoyen_name As Name, citoyen.citoyen_address As Address,test.test_res As Result FROM citoyen,test", con);
+                adapter.SelectCommand = new SqlCommand("SELECT citoyen.citoyen_cin as cin, citoyen_name as name, citoyen_address as address,test.test_res as PCR_Result FROM citoyen, test WHERE citoyen.citoyen_cin=test.citoyen_cin", con);
                 adapter.Fill(dt);
                 dataGridView1.DataSource = dt;
                 con.Close();
 
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                
+            }
+
         }
     }
 }

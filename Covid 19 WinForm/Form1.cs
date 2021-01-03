@@ -38,7 +38,8 @@ namespace Covid_19_WinForm
 
         private void suivre_Click(object sender, EventArgs e)
         {
-
+            suivi_les_patients t = new suivi_les_patients();
+            t.Show();
         }
     }
 }
