@@ -30,7 +30,14 @@ namespace Covid_19_WinForm
             DataGridViewTextBoxColumn textboxColumn = new DataGridViewTextBoxColumn();
             textboxColumn.Name = "days";
             textboxColumn.HeaderText = "jrs en quarantaine";
-            
+
+            DataGridViewButtonColumn btn2 = new DataGridViewButtonColumn();
+            btn2.HeaderText = "Faire le Vaccin";
+            btn2.Name = "vaccin";
+            btn2.Text = "Faire le Vaccin";
+            btn2.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Add(btn2);
+
             dataGridView1.Columns.Add(textboxColumn);
 
 
@@ -50,10 +57,36 @@ namespace Covid_19_WinForm
                 if (s == 14)
                 {
                     t.Stop();
-                    MessageBox.Show("the patients needs to redo the test");
+                    
+                    this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_CellFormatting);
                 }
 
             }));
+        }
+        private void Dgv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+            using (SqlConnection conn = new SqlConnection(chaine))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT citoyen_birth from citoyen WHERE citoyen_cin = @cn", conn);
+                cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
+                DateTime result = (DateTime)cmd.ExecuteScalar();
+                conn.Close();
+
+                int age = CalculateAge(result);
+                if (age > 50)
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                    insertCritiques(age, row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.Green;
+                    insertGueris(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                }
+            }
+
         }
 
         public void refresh()
@@ -81,7 +114,10 @@ namespace Covid_19_WinForm
         {
 
             s = 0;
-            t.Start();
+            if(dataGridView1.Rows.Count != 0)
+                t.Start();
+            
+
             dataGridView1.Visible = true;
             dataGridView3.Visible = false;
             dataGridView2.Visible = false;
@@ -119,7 +155,6 @@ namespace Covid_19_WinForm
             e.CellStyle.BackColor = Color.Orange;
 
         }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["pcr"].Index)
@@ -152,15 +187,54 @@ namespace Covid_19_WinForm
                 }
 
             }
+            if (e.ColumnIndex == dataGridView1.Columns["vaccin"].Index)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                row.DefaultCellStyle.ForeColor = Color.Azure;
+                using (SqlConnection con = new SqlConnection(chaine))
+                {
+                        con.Open();
+                        SqlCommand command = new SqlCommand();
+                        command.Connection = con;
+
+                        command.CommandText = "INSERT INTO vaccin VALUES(@datevaccin,@cin, @name,@birth, @address)";
+
+                    /*    command.Parameters.AddWithValue("@datevaccin", dateTimePicker1.Value.ToString());
+                        command.Parameters.AddWithValue("@cin", cinText.Text);
+                        command.Parameters.AddWithValue("@name", nomText.Text);
+                        command.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
+                        command.Parameters.AddWithValue("@address", addressText.Text);
+
+                    */
+                        try
+                        {
+                            int recordsAffected = command.ExecuteNonQuery();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            con.Close();
+
+                        }
+
+
+                }
+            }
+
         }
         public void insertGueris(string cin, string name, string address)
         {
             SqlConnection conn = new SqlConnection(chaine);
             conn.Open();
-            SqlCommand cmd2 = new SqlCommand("INSERT INTO gueri VALUES(@cin, @name, @add)", conn);
+            SqlCommand cmd2 = new SqlCommand("INSERT INTO gueris VALUES(@cin, @name, @add,@date)", conn);
             cmd2.Parameters.AddWithValue("@cin", cin);
             cmd2.Parameters.AddWithValue("@name", name);
             cmd2.Parameters.AddWithValue("@add", address);
+            cmd2.Parameters.AddWithValue("@date", DateTime.Now.ToString());
             try
             {
                 int recordsAffected = cmd2.ExecuteNonQuery();
@@ -260,7 +334,7 @@ namespace Covid_19_WinForm
             dataGridView1.Visible = false;
 
             SqlConnection con = new SqlConnection(chaine);
-            SqlCommand cmd = new SqlCommand("SELECT gueri_cin as CIN, gueri_name as Name, gueri_address as Address  FROM gueri ", con);
+            SqlCommand cmd = new SqlCommand("SELECT gueri_cin as CIN, gueri_name as Name, gueri_address as Address, gueri_date as date  FROM gueris ", con);
             con.Open();
 
             var dt = new DataTable();
@@ -303,6 +377,11 @@ namespace Covid_19_WinForm
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             e.CellStyle.BackColor = Color.LightGreen;
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

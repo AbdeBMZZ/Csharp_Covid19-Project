@@ -65,10 +65,10 @@
             // 
             // gueris_btn
             // 
-            this.gueris_btn.Location = new System.Drawing.Point(575, 13);
+            this.gueris_btn.Location = new System.Drawing.Point(576, 13);
             this.gueris_btn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gueris_btn.Name = "gueris_btn";
-            this.gueris_btn.Size = new System.Drawing.Size(153, 60);
+            this.gueris_btn.Size = new System.Drawing.Size(152, 54);
             this.gueris_btn.TabIndex = 2;
             this.gueris_btn.Text = "guéris";
             this.gueris_btn.UseVisualStyleBackColor = true;
@@ -79,10 +79,10 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.Location = new System.Drawing.Point(134, 126);
+            this.dataGridView1.Location = new System.Drawing.Point(108, 116);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(645, 294);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 294);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -97,17 +97,18 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(83, 108);
+            this.dataGridView2.Location = new System.Drawing.Point(103, 116);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(750, 222);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.Visible = false;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
             // 
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(83, 108);
+            this.dataGridView3.Location = new System.Drawing.Point(103, 116);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(750, 284);
             this.dataGridView3.TabIndex = 5;
