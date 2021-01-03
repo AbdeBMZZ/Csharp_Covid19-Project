@@ -16,7 +16,7 @@ namespace Covid_19_WinForm
     {
         static string chaine = @"Data Source=localhost;Initial Catalog=Covid winForm;Integrated Security=True";
         System.Timers.Timer t;
-        int h, m, s;
+        int s;
         public suivi_les_patients()
         {
             InitializeComponent();
@@ -45,38 +45,44 @@ namespace Covid_19_WinForm
         {
             Invoke(new Action(() =>
             {
+                refresh();
                 s += 1;
                 if (s == 14)
                 {
                     t.Stop();
+                    MessageBox.Show("the patients needs to redo the test");
                 }
 
-                SqlConnection con = new SqlConnection(chaine);
-                SqlCommand cmd = new SqlCommand("SELECT citoyen.citoyen_cin as CIN, citoyen.citoyen_name as Name, citoyen.citoyen_address as Address, test.test_res as PCR FROM citoyen,test WHERE  citoyen.citoyen_cin=test.citoyen_cin and test.test_res = @res", con);
-                con.Open();
-                cmd.Parameters.AddWithValue("@res", "POSITIF");
-
-                var dt = new DataTable();
-
-                using (var sqlDataReader = cmd.ExecuteReader())
-                {
-                    dt.Load(sqlDataReader);
-                }
-
-                dataGridView1.DataSource = dt;
-
-                dataGridView1.Visible = true;
-
-                con.Close();
             }));
         }
 
+        public void refresh()
+        {
+
+            SqlConnection con = new SqlConnection(chaine);
+            SqlCommand cmd = new SqlCommand("SELECT citoyen.citoyen_cin as CIN, citoyen.citoyen_name as Name, citoyen.citoyen_address as Address, test.test_res as PCR FROM citoyen,test WHERE  citoyen.citoyen_cin=test.citoyen_cin and test.test_res = @res", con);
+            con.Open();
+            cmd.Parameters.AddWithValue("@res", "POSITIF");
+
+            var dt = new DataTable();
+
+            using (var sqlDataReader = cmd.ExecuteReader())
+            {
+                dt.Load(sqlDataReader);
+            }
+
+            dataGridView1.DataSource = dt;
+
+            dataGridView1.Visible = true;
+
+            con.Close();
+        }
         private void en_quarantaine_Click(object sender, EventArgs e)
         {
 
-            s = 1;
+            s = 0;
             t.Start();
-
+            dataGridView3.Visible = false;
             dataGridView2.Visible = false;
             dataGridView1.Visible = true;
             SqlConnection con = new SqlConnection(chaine);
@@ -103,7 +109,6 @@ namespace Covid_19_WinForm
 
         private void timer1_Tick(object sender, EventArgs e)
         {
- 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -113,8 +118,9 @@ namespace Covid_19_WinForm
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-            row.Cells["days"].Value = string.Format("{0}:{1}:{2}",h.ToString().PadLeft(2,'0'),m.ToString().PadLeft(2,'0'),s.ToString().PadLeft(2,'0'));
+            row.Cells["days"].Value = string.Format("{0}",s.ToString().PadLeft(2,'0'));
             e.CellStyle.BackColor = Color.Orange;
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -131,12 +137,69 @@ namespace Covid_19_WinForm
                     conn.Close();
 
                     int age = CalculateAge(result);
-                    if(age>50)
+                    if (age > 50)
+                    {
                         insertCritiques(age, row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
-
-
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                        deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
+                    }
+                    t.Stop();
+                    if (age < 50)
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Green;
+                        insertGueris(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                        deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
+                    }
 
                 }
+
+            }
+        }
+        public void insertGueris(string cin, string name, string address)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd2 = new SqlCommand("INSERT INTO gueri VALUES(@cin, @name, @add)", conn);
+            cmd2.Parameters.AddWithValue("@cin", cin);
+            cmd2.Parameters.AddWithValue("@name", name);
+            cmd2.Parameters.AddWithValue("@add", address);
+            try
+            {
+                int recordsAffected = cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+
+        }
+        private void deleteCases_quarantined(string cin)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd1 = new SqlCommand("DELETE FROM test WHERE citoyen_cin=@cin", conn);
+            SqlCommand cmd = new SqlCommand("DELETE FROM citoyen WHERE citoyen_cin=@cin", conn);
+            cmd.Parameters.AddWithValue("@cin", cin);
+            cmd1.Parameters.AddWithValue("@cin", cin);
+
+            try
+            {
+                int recordsAffected1 = cmd1.ExecuteNonQuery();
+
+                int recordsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
 
             }
         }
@@ -174,6 +237,10 @@ namespace Covid_19_WinForm
 
         private void suivi_les_patients_Load(object sender, EventArgs e)
         {
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToAddRows = false;
+
 
         }
 
@@ -182,10 +249,41 @@ namespace Covid_19_WinForm
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.BackColor = Color.Red;
+        }
+
+        private void gueris_btn_Click(object sender, EventArgs e)
         {
             dataGridView1.Visible = false;
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = true;
+
+            SqlConnection con = new SqlConnection(chaine);
+            SqlCommand cmd = new SqlCommand("SELECT gueri_cin as CIN, gueri_name as Name, gueri_address as Address  FROM gueri ", con);
+            con.Open();
+
+            var dt = new DataTable();
+
+            using (var sqlDataReader = cmd.ExecuteReader())
+            {
+                dt.Load(sqlDataReader);
+            }
+
+            dataGridView3.DataSource = dt;
+
+
+            con.Close();
+        }
+
+        private void en_reanimation_btn_Click_1(object sender, EventArgs e)
+        {
+            dataGridView1.Visible = false;
+            dataGridView3.Visible = false;
             dataGridView2.Visible = true;
+            t.Stop();
 
             SqlConnection con = new SqlConnection(chaine);
             SqlCommand cmd = new SqlCommand("SELECT p_cin as CIN, p_name as Name, p_address as Address FROM patient_en_reanimation ", con);
@@ -202,11 +300,6 @@ namespace Covid_19_WinForm
 
 
             con.Close();
-        }
-
-        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            e.CellStyle.BackColor = Color.Red;
         }
     }
 }
