@@ -34,7 +34,7 @@ namespace Covid_19_WinForm
                     command2.Connection = con;
 
                     command.CommandText = "INSERT INTO citoyen VALUES(@cin, @name, @birth, @address,@code)";
-                    command2.CommandText = "INSERT INTO test VALUES(@test_res, @cin2)";
+                    command2.CommandText = "INSERT INTO test1 VALUES(@test_res, @cin2)";
 
                     if (radioButton2.Checked == true && radioButton4.Checked == true)
                     {
@@ -44,8 +44,31 @@ namespace Covid_19_WinForm
                     else if (radioButton2.Checked == false && radioButton4.Checked == false)
                     {
                         command2.Parameters.AddWithValue("@test_res", "POSITIF");
+                        SqlCommand command3 = new SqlCommand("INSERT INTO patient_quarantaine VALUES(@cin, @name, @birth, @add)",con);
+                        SqlCommand command4 = new SqlCommand("INSERT INTO test2 VALUES(@test_res, @cin_p)", con);
+                        command4.Parameters.AddWithValue("@test_res", "POSITIF");
+                        command4.Parameters.AddWithValue("@cin_p", cinText.Text);
+
+                        command3.Parameters.AddWithValue("@cin", cinText.Text);
+                        command3.Parameters.AddWithValue("@name", nomText.Text);
+                        command3.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
+                        command3.Parameters.AddWithValue("@add", addressText.Text);
+
+                        try
+                        {
+                            int recordsAffected3 = command3.ExecuteNonQuery();
+                            int recordsAffected4 = command4.ExecuteNonQuery();
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
 
                     }
+
 
                     command2.Parameters.AddWithValue("@cin2", cinText.Text);
 
@@ -57,7 +80,6 @@ namespace Covid_19_WinForm
                         command.Parameters.AddWithValue("@code","green");
                     else
                         command.Parameters.AddWithValue("@code", "orange");
-
                     try
                     {
                         int recordsAffected = command.ExecuteNonQuery();

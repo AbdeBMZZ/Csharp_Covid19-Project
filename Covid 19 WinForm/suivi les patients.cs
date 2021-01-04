@@ -16,7 +16,9 @@ namespace Covid_19_WinForm
     {
         static string chaine = @"Data Source=localhost;Initial Catalog=Covid winForm;Integrated Security=True";
         System.Timers.Timer t;
-        int s;
+        System.Timers.Timer t2;
+
+        int s,s2;
         public suivi_les_patients()
         {
             InitializeComponent();
@@ -40,10 +42,20 @@ namespace Covid_19_WinForm
 
             dataGridView1.Columns.Add(textboxColumn);
 
+            DataGridViewTextBoxColumn textboxColumn3 = new DataGridViewTextBoxColumn();
+            textboxColumn3.Name = "days_r";
+            textboxColumn3.HeaderText = "jrs en reanimation";
+            dataGridView2.Columns.Add(textboxColumn3);
+
+
 
             t = new System.Timers.Timer();
             t.Interval = 1000;
             t.Elapsed += OnTimeEvent;
+
+            t2 = new System.Timers.Timer();
+            t2.Interval = 1000;
+            t2.Elapsed += OnTimeEvent2;
         }
 
 
@@ -59,32 +71,106 @@ namespace Covid_19_WinForm
                     t.Stop();
                     
                     this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_CellFormatting);
+
                 }
 
             }));
         }
+
+        private void OnTimeEvent2(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Invoke(new Action(() =>
+            {
+                refresh2();
+                s2 += 1;
+                if (s2 == 6)
+                {
+                    t2.Stop();
+
+                    this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_CellFormatting2);
+
+                }
+
+            }));
+        }
+
         private void Dgv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
             using (SqlConnection conn = new SqlConnection(chaine))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT citoyen_birth from citoyen WHERE citoyen_cin = @cn", conn);
+                SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
                 cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
-                DateTime result = (DateTime)cmd.ExecuteScalar();
+
+                object result = cmd.ExecuteScalar();
+                DateTime resAge = DateTime.Now;
+                if (result != null)
+                {
+                    resAge = (DateTime)result;
+                }
+
                 conn.Close();
 
-                int age = CalculateAge(result);
-                if (age > 50)
+                int age = CalculateAge(resAge);
+                MessageBox.Show(age.ToString());
+
+                if (age > 60)
                 {
                     e.CellStyle.BackColor = Color.Red;
-                    insertCritiques(age, row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                    insertCritiques(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                    deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
+
                 }
-                else
+                else if(age<50)
                 {
                     e.CellStyle.BackColor = Color.Green;
                     insertGueris(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+
+                    deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
+
+
                 }
+
+            }
+
+        }
+
+
+        private void Dgv_CellFormatting2(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewRow row = this.dataGridView2.Rows[e.RowIndex];
+            using (SqlConnection conn = new SqlConnection(chaine))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
+                cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
+
+                object result = cmd.ExecuteScalar();
+                DateTime resAge = DateTime.Now;
+                if (result != null)
+                {
+                    resAge = (DateTime)result;
+                }
+
+                conn.Close();
+                int age = CalculateAge(resAge);
+
+                if (age > 65)
+                {
+                    e.CellStyle.BackColor = Color.Black;
+                    insertdeaths(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                    deleteC_reanimation(row.Cells["CIN"].Value.ToString());
+
+                }
+                else if (age < 65)
+                {
+                    e.CellStyle.BackColor = Color.Orange;
+                    insertQuarantined(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                    deleteC_reanimation(row.Cells["CIN"].Value.ToString());
+
+                }
+
             }
 
         }
@@ -93,9 +179,30 @@ namespace Covid_19_WinForm
         {
 
             SqlConnection con = new SqlConnection(chaine);
-            SqlCommand cmd = new SqlCommand("SELECT citoyen.citoyen_cin as CIN, citoyen.citoyen_name as Name, citoyen.citoyen_address as Address, test.test_res as PCR FROM citoyen,test WHERE  citoyen.citoyen_cin=test.citoyen_cin and test.test_res = @res", con);
+            SqlCommand cmd = new SqlCommand("SELECT patient_cin as CIN, patient_name as Name, patient_address as Address  FROM patient_quarantaine", con);
+
             con.Open();
-            cmd.Parameters.AddWithValue("@res", "POSITIF");
+
+            var dt = new DataTable();
+
+            using ( var sqlDataReader = cmd.ExecuteReader())
+            {
+                dt.Load(sqlDataReader);
+            }
+
+
+            dataGridView1.DataSource = dt;
+
+
+            con.Close();
+        }
+
+        public void refresh2()
+        {
+            SqlConnection con = new SqlConnection(chaine);
+            SqlCommand cmd = new SqlCommand("SELECT p_cin as CIN, p_name as Name, p_address as Address FROM patient_en_reanimation ", con);
+
+            con.Open();
 
             var dt = new DataTable();
 
@@ -104,11 +211,11 @@ namespace Covid_19_WinForm
                 dt.Load(sqlDataReader);
             }
 
-            dataGridView1.DataSource = dt;
+            dataGridView2.DataSource = dt;
 
-            dataGridView1.Visible = true;
 
             con.Close();
+
         }
         private void en_quarantaine_Click(object sender, EventArgs e)
         {
@@ -121,10 +228,11 @@ namespace Covid_19_WinForm
             dataGridView1.Visible = true;
             dataGridView3.Visible = false;
             dataGridView2.Visible = false;
+            dataGridView4.Visible = false;
+
             SqlConnection con = new SqlConnection(chaine);
-            SqlCommand cmd = new SqlCommand("SELECT citoyen.citoyen_cin as CIN, citoyen.citoyen_name as Name, citoyen.citoyen_address as Address, test.test_res as PCR FROM citoyen,test WHERE  citoyen.citoyen_cin=test.citoyen_cin and test.test_res = @res", con);
+            SqlCommand cmd = new SqlCommand("SELECT patient_cin as CIN, patient_name as Name, patient_address as Address FROM patient_quarantaine", con);
             con.Open();
-            cmd.Parameters.AddWithValue("@res", "POSITIF");
 
             var dt = new DataTable();
 
@@ -139,8 +247,6 @@ namespace Covid_19_WinForm
 
             con.Close();
             
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -163,7 +269,7 @@ namespace Covid_19_WinForm
                 using (SqlConnection conn = new SqlConnection(chaine))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT citoyen_birth from citoyen WHERE citoyen_cin = @cn", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
                     cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
                     DateTime result = (DateTime)cmd.ExecuteScalar();
                     conn.Close();
@@ -171,11 +277,10 @@ namespace Covid_19_WinForm
                     int age = CalculateAge(result);
                     if (age > 50)
                     {
-                        insertCritiques(age, row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
+                        insertCritiques(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
                         row.DefaultCellStyle.ForeColor = Color.Red;
                         deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
                     }
-                    t.Stop();
                     if (age < 50)
                     {
                         row.DefaultCellStyle.ForeColor = Color.Green;
@@ -191,40 +296,93 @@ namespace Covid_19_WinForm
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 row.DefaultCellStyle.ForeColor = Color.Azure;
-                using (SqlConnection con = new SqlConnection(chaine))
-                {
-                        con.Open();
-                        SqlCommand command = new SqlCommand();
-                        command.Connection = con;
+                SqlConnection conn = new SqlConnection(chaine);
 
-                        command.CommandText = "INSERT INTO vaccin VALUES(@datevaccin,@cin, @name,@birth, @address)";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
+                cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
+                DateTime result = (DateTime)cmd.ExecuteScalar();
+                conn.Close();
+                insertVaccinated(DateTime.Now, row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), result, row.Cells["Address"].Value.ToString());
+                deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
 
-                    /*    command.Parameters.AddWithValue("@datevaccin", dateTimePicker1.Value.ToString());
-                        command.Parameters.AddWithValue("@cin", cinText.Text);
-                        command.Parameters.AddWithValue("@name", nomText.Text);
-                        command.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
-                        command.Parameters.AddWithValue("@address", addressText.Text);
-
-                    */
-                        try
-                        {
-                            int recordsAffected = command.ExecuteNonQuery();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        finally
-                        {
-                            con.Close();
-
-                        }
-
-
-                }
+                MessageBox.Show("patient vaccinated");
             }
 
+        }
+
+        public void insertVaccinated(DateTime t, string cin, string name, DateTime b, string address)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd2 = new SqlCommand("INSERT INTO vaccin VALUES(@d, @cin, @name, @date, @add)", conn);
+            cmd2.Parameters.AddWithValue("@d", DateTime.Now.ToString());
+            cmd2.Parameters.AddWithValue("@cin", cin);
+            cmd2.Parameters.AddWithValue("@name", name);
+            cmd2.Parameters.AddWithValue("@add", address);
+            cmd2.Parameters.AddWithValue("@date", b.ToString());
+            try
+            {
+                int recordsAffected = cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+
+        }
+
+        public void insertQuarantined(string cin, string name, string address)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd2 = new SqlCommand("INSERT INTO patient_quarantaine VALUES(@cin, @name, @date, @add)", conn);
+            cmd2.Parameters.AddWithValue("@cin", cin);
+            cmd2.Parameters.AddWithValue("@name", name);
+            cmd2.Parameters.AddWithValue("@add", address);
+            cmd2.Parameters.AddWithValue("@date", DateTime.Now.ToString());
+            try
+            {
+                int recordsAffected = cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+        }
+
+        public void insertdeaths(string cin, string name, string address)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd2 = new SqlCommand("INSERT INTO decedes VALUES(@cin, @name, @add, @date)", conn);
+            cmd2.Parameters.AddWithValue("@cin", cin);
+            cmd2.Parameters.AddWithValue("@name", name);
+            cmd2.Parameters.AddWithValue("@add", address);
+            cmd2.Parameters.AddWithValue("@date", DateTime.Now.ToString());
+            try
+            {
+                int recordsAffected = cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
         }
         public void insertGueris(string cin, string name, string address)
         {
@@ -241,7 +399,7 @@ namespace Covid_19_WinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -254,16 +412,12 @@ namespace Covid_19_WinForm
         {
             SqlConnection conn = new SqlConnection(chaine);
             conn.Open();
-            SqlCommand cmd1 = new SqlCommand("DELETE FROM test WHERE citoyen_cin=@cin", conn);
-            SqlCommand cmd = new SqlCommand("DELETE FROM citoyen WHERE citoyen_cin=@cin", conn);
+            SqlCommand cmd = new SqlCommand("DELETE FROM patient_quarantaine WHERE patient_cin=@cin", conn);
             cmd.Parameters.AddWithValue("@cin", cin);
-            cmd1.Parameters.AddWithValue("@cin", cin);
-
             try
             {
-                int recordsAffected1 = cmd1.ExecuteNonQuery();
-
                 int recordsAffected = cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
@@ -275,7 +429,29 @@ namespace Covid_19_WinForm
 
             }
         }
-        private void insertCritiques(int age, string cin, string name, string address)
+        private void deleteC_reanimation(string cin)
+        {
+            SqlConnection conn = new SqlConnection(chaine);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM patient_en_reanimation WHERE p_cin=@cin", conn);
+            cmd.Parameters.AddWithValue("@cin", cin);
+            try
+            {
+                int recordsAffected = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+
+        }
+        private void insertCritiques(string cin, string name, string address)
         {
             SqlConnection conn = new SqlConnection(chaine);
             conn.Open();
@@ -289,7 +465,7 @@ namespace Covid_19_WinForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -324,6 +500,8 @@ namespace Covid_19_WinForm
 
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            DataGridViewRow row = this.dataGridView2.Rows[e.RowIndex];
+            row.Cells["days_r"].Value = string.Format("{0}", s2.ToString().PadLeft(2, '0'));
             e.CellStyle.BackColor = Color.Red;
         }
 
@@ -332,6 +510,7 @@ namespace Covid_19_WinForm
             dataGridView3.Visible = true;
             dataGridView2.Visible = false;
             dataGridView1.Visible = false;
+            dataGridView4.Visible = false;
 
             SqlConnection con = new SqlConnection(chaine);
             SqlCommand cmd = new SqlCommand("SELECT gueri_cin as CIN, gueri_name as Name, gueri_address as Address, gueri_date as date  FROM gueris ", con);
@@ -352,11 +531,14 @@ namespace Covid_19_WinForm
 
         private void en_reanimation_btn_Click_1(object sender, EventArgs e)
         {
+            s2 = 0;
+            if (dataGridView2.Rows.Count != 0)
+                t2.Start();
             dataGridView2.Visible = true;
             dataGridView1.Visible = false;
             dataGridView3.Visible = false;
-            t.Stop();
-
+            dataGridView4.Visible = false;
+            
             SqlConnection con = new SqlConnection(chaine);
             SqlCommand cmd = new SqlCommand("SELECT p_cin as CIN, p_name as Name, p_address as Address FROM patient_en_reanimation ", con);
             con.Open();
@@ -382,6 +564,34 @@ namespace Covid_19_WinForm
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void decedes_Click(object sender, EventArgs e)
+        {
+            dataGridView4.Visible = true;
+            dataGridView3.Visible = false;
+            dataGridView2.Visible = false;
+            dataGridView1.Visible = false;
+            SqlConnection con = new SqlConnection(chaine);
+            SqlCommand cmd = new SqlCommand("SELECT d_cin as CIN, d_name as Name, d_address as Address, d_date as date  FROM decedes ", con);
+            con.Open();
+
+            var dt = new DataTable();
+
+            using (var sqlDataReader = cmd.ExecuteReader())
+            {
+                dt.Load(sqlDataReader);
+            }
+
+            dataGridView4.DataSource = dt;
+
+
+            con.Close();
         }
     }
 }

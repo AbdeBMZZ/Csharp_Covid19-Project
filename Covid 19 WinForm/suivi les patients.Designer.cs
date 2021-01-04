@@ -36,14 +36,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.decedes = new System.Windows.Forms.Button();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // en_quarantaine
             // 
-            this.en_quarantaine.Location = new System.Drawing.Point(179, 13);
+            this.en_quarantaine.Location = new System.Drawing.Point(56, 13);
             this.en_quarantaine.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.en_quarantaine.Name = "en_quarantaine";
             this.en_quarantaine.Size = new System.Drawing.Size(153, 56);
@@ -54,7 +57,7 @@
             // 
             // en_reanimation_btn
             // 
-            this.en_reanimation_btn.Location = new System.Drawing.Point(377, 13);
+            this.en_reanimation_btn.Location = new System.Drawing.Point(254, 13);
             this.en_reanimation_btn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.en_reanimation_btn.Name = "en_reanimation_btn";
             this.en_reanimation_btn.Size = new System.Drawing.Size(153, 54);
@@ -65,7 +68,7 @@
             // 
             // gueris_btn
             // 
-            this.gueris_btn.Location = new System.Drawing.Point(576, 13);
+            this.gueris_btn.Location = new System.Drawing.Point(453, 13);
             this.gueris_btn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gueris_btn.Name = "gueris_btn";
             this.gueris_btn.Size = new System.Drawing.Size(152, 54);
@@ -114,12 +117,34 @@
             this.dataGridView3.TabIndex = 5;
             this.dataGridView3.Visible = false;
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
+            this.dataGridView3.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellValueChanged);
+            // 
+            // decedes
+            // 
+            this.decedes.Location = new System.Drawing.Point(658, 13);
+            this.decedes.Name = "decedes";
+            this.decedes.Size = new System.Drawing.Size(153, 54);
+            this.decedes.TabIndex = 6;
+            this.decedes.Text = "décédés";
+            this.decedes.UseVisualStyleBackColor = true;
+            this.decedes.Click += new System.EventHandler(this.decedes_Click);
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(103, 116);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(750, 275);
+            this.dataGridView4.TabIndex = 7;
+            this.dataGridView4.Visible = false;
             // 
             // suivi_les_patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 485);
+            this.Controls.Add(this.dataGridView4);
+            this.Controls.Add(this.decedes);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
@@ -135,6 +160,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -148,5 +174,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button decedes;
+        private System.Windows.Forms.DataGridView dataGridView4;
     }
 }
