@@ -93,6 +93,15 @@ namespace Covid_19_WinForm
                         con.Close();
                         testing t = new testing();
                         t.Show();
+                        cinText.Text = "";
+                        nomText.Text = "";
+                        dateTimePicker1.Value = DateTime.Now;
+                        addressText.Text = "";
+                        radioButton1.Checked = false;
+                        radioButton2.Checked = false;
+                        radioButton3.Checked = false;
+                        radioButton4.Checked = false;
+
 
                     }
                 }
@@ -138,7 +147,17 @@ namespace Covid_19_WinForm
                     finally
                     {
                         con.Close();
-
+                        con.Close();
+                        testing t = new testing();
+                        t.Show();
+                        cinText.Text = "";
+                        nomText.Text = "";
+                        dateTimePicker1.Value = DateTime.Now;
+                        addressText.Text = "";
+                        radioButton1.Checked = false;
+                        radioButton2.Checked = false;
+                        radioButton3.Checked = false;
+                        radioButton4.Checked = false;
                     }
                 }
                 else

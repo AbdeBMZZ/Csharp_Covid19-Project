@@ -29,7 +29,7 @@ namespace Covid_19_WinForm
             if (progressBar1.Value == 100)
             {
                 this.Close();
-
+                MessageBox.Show("test effectué");
             }
         }
     }

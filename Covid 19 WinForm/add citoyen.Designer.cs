@@ -246,7 +246,7 @@
             this.dateTimePicker1.CustomFormat = "dd-MM-yyyy";
             this.dateTimePicker1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(407, 262);
+            this.dateTimePicker1.Location = new System.Drawing.Point(407, 268);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(122, 23);
             this.dateTimePicker1.TabIndex = 23;
@@ -256,7 +256,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(96, 266);
+            this.label8.Location = new System.Drawing.Point(96, 269);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(120, 16);
             this.label8.TabIndex = 3;
