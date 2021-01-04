@@ -40,8 +40,7 @@ namespace Covid_19_WinForm
                     {
                         command2.Parameters.AddWithValue("@test_res", "NEGATIF");
                     }
-
-                    else if (radioButton2.Checked == false && radioButton4.Checked == false)
+                    else
                     {
                         command2.Parameters.AddWithValue("@test_res", "POSITIF");
                         SqlCommand command3 = new SqlCommand("INSERT INTO patient_quarantaine VALUES(@cin, @name, @birth, @add)",con);
@@ -53,7 +52,6 @@ namespace Covid_19_WinForm
                         command3.Parameters.AddWithValue("@name", nomText.Text);
                         command3.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());
                         command3.Parameters.AddWithValue("@add", addressText.Text);
-
                         try
                         {
                             int recordsAffected3 = command3.ExecuteNonQuery();

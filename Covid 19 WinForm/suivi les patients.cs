@@ -100,7 +100,7 @@ namespace Covid_19_WinForm
             using (SqlConnection conn = new SqlConnection(chaine))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
+                SqlCommand cmd = new SqlCommand("SELECT citoyen_birth from citoyen WHERE citoyen_cin = @cn", conn);
                 cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
 
                 object result = cmd.ExecuteScalar();
@@ -113,17 +113,17 @@ namespace Covid_19_WinForm
                 conn.Close();
 
                 int age = CalculateAge(resAge);
-                MessageBox.Show(age.ToString());
 
-                if (age > 60)
+                if (age > 60 && age!=0)
                 {
                     e.CellStyle.BackColor = Color.Red;
                     insertCritiques(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
                     deleteCases_quarantined(row.Cells["CIN"].Value.ToString());
 
                 }
-                else if(age<50)
+                else if(age<50 && age!=0)
                 {
+
                     e.CellStyle.BackColor = Color.Green;
                     insertGueris(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
 
@@ -143,7 +143,7 @@ namespace Covid_19_WinForm
             using (SqlConnection conn = new SqlConnection(chaine))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT patient_birth from patient_quarantaine WHERE patient_cin = @cn", conn);
+                SqlCommand cmd = new SqlCommand("SELECT citoyen_birth from citoyen WHERE citoyen_cin = @cn", conn);
                 cmd.Parameters.AddWithValue("@cn", row.Cells["CIN"].Value.ToString());
 
                 object result = cmd.ExecuteScalar();
@@ -156,20 +156,24 @@ namespace Covid_19_WinForm
                 conn.Close();
                 int age = CalculateAge(resAge);
 
-                if (age > 65)
+
+                if (age > 65 && age !=0)
                 {
                     e.CellStyle.BackColor = Color.Black;
+                    e.CellStyle.ForeColor = Color.White;
                     insertdeaths(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
                     deleteC_reanimation(row.Cells["CIN"].Value.ToString());
 
                 }
-                else if (age < 65)
+                else if (age < 65 && age !=0)
                 {
+
                     e.CellStyle.BackColor = Color.Orange;
                     insertQuarantined(row.Cells["CIN"].Value.ToString(), row.Cells["Name"].Value.ToString(), row.Cells["Address"].Value.ToString());
                     deleteC_reanimation(row.Cells["CIN"].Value.ToString());
 
                 }
+
 
             }
 
