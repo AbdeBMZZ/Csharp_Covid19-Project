@@ -13,3 +13,4 @@ C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_Win
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.testing.resources
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.suivi_les_patients.resources
 C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.vaccinated.resources
+C:\Users\Eliot\source\repos\covidPatient\Covid 19 WinForm\obj\Debug\Covid_19_WinForm.distribution.resources

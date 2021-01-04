@@ -32,12 +32,13 @@
             this.ajouter = new System.Windows.Forms.Button();
             this.en_attente = new System.Windows.Forms.Button();
             this.vaccin = new System.Windows.Forms.Button();
+            this.dis = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // suivre
             // 
             this.suivre.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.suivre.Location = new System.Drawing.Point(59, 118);
+            this.suivre.Location = new System.Drawing.Point(22, 109);
             this.suivre.Name = "suivre";
             this.suivre.Size = new System.Drawing.Size(150, 50);
             this.suivre.TabIndex = 0;
@@ -59,7 +60,7 @@
             // en_attente
             // 
             this.en_attente.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.en_attente.Location = new System.Drawing.Point(59, 200);
+            this.en_attente.Location = new System.Drawing.Point(22, 191);
             this.en_attente.Name = "en_attente";
             this.en_attente.Size = new System.Drawing.Size(150, 84);
             this.en_attente.TabIndex = 2;
@@ -70,7 +71,7 @@
             // vaccin
             // 
             this.vaccin.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vaccin.Location = new System.Drawing.Point(59, 333);
+            this.vaccin.Location = new System.Drawing.Point(22, 311);
             this.vaccin.Name = "vaccin";
             this.vaccin.Size = new System.Drawing.Size(150, 58);
             this.vaccin.TabIndex = 3;
@@ -78,11 +79,23 @@
             this.vaccin.UseVisualStyleBackColor = true;
             this.vaccin.Click += new System.EventHandler(this.vaccin_Click);
             // 
+            // dis
+            // 
+            this.dis.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dis.Location = new System.Drawing.Point(22, 395);
+            this.dis.Name = "dis";
+            this.dis.Size = new System.Drawing.Size(150, 54);
+            this.dis.TabIndex = 4;
+            this.dis.Text = "Statistiques";
+            this.dis.UseVisualStyleBackColor = true;
+            this.dis.Click += new System.EventHandler(this.dis_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 461);
+            this.Controls.Add(this.dis);
             this.Controls.Add(this.vaccin);
             this.Controls.Add(this.en_attente);
             this.Controls.Add(this.ajouter);
@@ -101,6 +114,7 @@
         private System.Windows.Forms.Button ajouter;
         private System.Windows.Forms.Button en_attente;
         private System.Windows.Forms.Button vaccin;
+        private System.Windows.Forms.Button dis;
     }
 }
 

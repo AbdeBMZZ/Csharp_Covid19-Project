@@ -47,5 +47,11 @@ namespace Covid_19_WinForm
             vaccinated v = new vaccinated();
             v.Show();
         }
+
+        private void dis_Click(object sender, EventArgs e)
+        {
+            distribution d = new distribution();
+            d.Show();
+        }
     }
 }

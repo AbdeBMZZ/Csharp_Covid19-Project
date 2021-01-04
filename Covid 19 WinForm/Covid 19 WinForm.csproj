@@ -58,6 +58,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Covid_winFormDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="distribution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="distribution.Designer.cs">
+      <DependentUpon>distribution.cs</DependentUpon>
+    </Compile>
     <Compile Include="en attente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </Compile>
     <EmbeddedResource Include="add citoyen.resx">
       <DependentUpon>add citoyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="distribution.resx">
+      <DependentUpon>distribution.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="en attente.resx">
       <DependentUpon>en attente.cs</DependentUpon>

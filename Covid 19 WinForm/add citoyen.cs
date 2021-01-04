@@ -93,10 +93,12 @@ namespace Covid_19_WinForm
                         con.Close();
                         testing t = new testing();
                         t.Show();
+
                     }
                 }
                 else
                     MessageBox.Show("please check your informations");
+
 
 
             }
