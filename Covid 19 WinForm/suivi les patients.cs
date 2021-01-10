@@ -163,8 +163,11 @@ namespace Covid_19_WinForm
                 conn.Close();
                 int age = CalculateAge(resAge);
 
+                Random rand = new Random();
+                int test = rand.Next(0, 2);
 
-                if (age > 65 && age !=0)
+
+                if (age > 65 && age !=0 || test==1 && age !=0)
                 {
                     e.CellStyle.BackColor = Color.Black;
                     e.CellStyle.ForeColor = Color.White;
@@ -172,7 +175,7 @@ namespace Covid_19_WinForm
                     deleteC_reanimation(row.Cells["CIN"].Value.ToString());
 
                 }
-                else if (age < 65 && age !=0)
+                else if (age < 65 && age !=0 || test != 1 && age != 0)
                 {
 
                     e.CellStyle.BackColor = Color.Orange;
