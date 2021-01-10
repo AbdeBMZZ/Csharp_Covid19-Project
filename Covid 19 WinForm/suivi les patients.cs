@@ -14,14 +14,15 @@ namespace Covid_19_WinForm
 {
     public partial class suivi_les_patients : Form
     {
-        static string chaine = @"Data Source=localhost;Initial Catalog=Covid winForm;Integrated Security=True";
-        System.Timers.Timer t;
-        System.Timers.Timer t2;
+        string chaine = @"Data Source=localhost;Initial Catalog=Covid winForm;Integrated Security=True";
+        public System.Timers.Timer t;
+        public System.Timers.Timer t2;
 
-        int s,s2;
+        public int s,s2;
         public suivi_les_patients()
         {
             InitializeComponent();
+
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
             btn.HeaderText = "Refaire PCR";
             btn.Name = "pcr";
@@ -52,9 +53,13 @@ namespace Covid_19_WinForm
             t = new System.Timers.Timer();
             t.Interval = 1000;
             t.Elapsed += OnTimeEvent;
+            s = 0;
+            if (dataGridView1.Rows.Count != 0)
+                t.Start();
 
             t2 = new System.Timers.Timer();
             t2.Interval = 1000;
+            s2 = 0;
             t2.Elapsed += OnTimeEvent2;
         }
 
@@ -68,9 +73,11 @@ namespace Covid_19_WinForm
                 s += 1;
                 if (s == 14)
                 {
+                    this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_CellFormatting);
+                    t2.Start();
+
                     t.Stop();
                     
-                    this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Dgv_CellFormatting);
 
                 }
 
@@ -224,11 +231,6 @@ namespace Covid_19_WinForm
         private void en_quarantaine_Click(object sender, EventArgs e)
         {
 
-            s = 0;
-            if(dataGridView1.Rows.Count != 0)
-                t.Start();
-            
-
             dataGridView1.Visible = true;
             dataGridView3.Visible = false;
             dataGridView2.Visible = false;
@@ -270,6 +272,7 @@ namespace Covid_19_WinForm
             if (e.ColumnIndex == dataGridView1.Columns["pcr"].Index)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                
                 using (SqlConnection conn = new SqlConnection(chaine))
                 {
                     conn.Open();
@@ -535,9 +538,7 @@ namespace Covid_19_WinForm
 
         private void en_reanimation_btn_Click_1(object sender, EventArgs e)
         {
-            s2 = 0;
-            if (dataGridView2.Rows.Count != 0)
-                t2.Start();
+
             dataGridView2.Visible = true;
             dataGridView1.Visible = false;
             dataGridView3.Visible = false;
@@ -572,6 +573,14 @@ namespace Covid_19_WinForm
 
         private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void dataGridView4_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.BackColor = Color.Black;
+            e.CellStyle.ForeColor = Color.White;
+
 
         }
 

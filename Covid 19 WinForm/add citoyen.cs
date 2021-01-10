@@ -42,12 +42,13 @@ namespace Covid_19_WinForm
                     }
                     else
                     {
+
                         command2.Parameters.AddWithValue("@test_res", "POSITIF");
                         SqlCommand command3 = new SqlCommand("INSERT INTO patient_quarantaine VALUES(@cin, @name, @birth, @add)",con);
                         SqlCommand command4 = new SqlCommand("INSERT INTO test2 VALUES(@test_res, @cin_p)", con);
                         command4.Parameters.AddWithValue("@test_res", "POSITIF");
                         command4.Parameters.AddWithValue("@cin_p", cinText.Text);
-
+                        
                         command3.Parameters.AddWithValue("@cin", cinText.Text);
                         command3.Parameters.AddWithValue("@name", nomText.Text);
                         command3.Parameters.AddWithValue("@birth", dateTime_text.Value.ToString());

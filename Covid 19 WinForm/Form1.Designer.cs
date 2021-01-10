@@ -38,7 +38,7 @@
             // suivre
             // 
             this.suivre.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.suivre.Location = new System.Drawing.Point(22, 109);
+            this.suivre.Location = new System.Drawing.Point(22, 227);
             this.suivre.Name = "suivre";
             this.suivre.Size = new System.Drawing.Size(150, 50);
             this.suivre.TabIndex = 0;
@@ -60,7 +60,7 @@
             // en_attente
             // 
             this.en_attente.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.en_attente.Location = new System.Drawing.Point(22, 191);
+            this.en_attente.Location = new System.Drawing.Point(22, 118);
             this.en_attente.Name = "en_attente";
             this.en_attente.Size = new System.Drawing.Size(150, 84);
             this.en_attente.TabIndex = 2;
