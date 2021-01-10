@@ -164,7 +164,7 @@ namespace Covid_19_WinForm
                 int age = CalculateAge(resAge);
 
                 Random rand = new Random();
-                int test = rand.Next(0, 2);
+                int test = rand.Next(0, 3);
 
 
                 if (age > 65 && age !=0 || test==1 && age !=0)
